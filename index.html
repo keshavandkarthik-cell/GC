@@ -2,285 +2,762 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Veda // Dev Seeder</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;900&amp;family=DM+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;900&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0a0e1a;--accent:#4d9fff;--teal:#00d4aa;--silver:#8899bb;--text:#ddeeff;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{
-  background:
-    linear-gradient(rgba(77,159,255,.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(77,159,255,.03) 1px,transparent 1px),
-    radial-gradient(ellipse at 20% 50%,rgba(77,159,255,.06) 0%,transparent 60%),
-    radial-gradient(ellipse at 80% 20%,rgba(0,212,170,.05) 0%,transparent 50%),#0a0e1a;
-  background-size:40px 40px,40px 40px,100% 100%,100% 100%,100%;
-  color:var(--text);font-family:'DM Mono',monospace;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;padding:40px 20px;
-}
-.card{
-  width:min(600px,100%);
-  background:linear-gradient(145deg,rgba(15,21,40,.98),rgba(10,14,26,.99));
-  border:1px solid rgba(77,159,255,.3);border-radius:22px;overflow:hidden;
-  box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 1px rgba(77,159,255,.06);
-}
-.hdr{
-  background:linear-gradient(135deg,rgba(77,159,255,.1),rgba(0,212,170,.06));
-  border-bottom:1px solid rgba(77,159,255,.18);padding:28px 32px;position:relative;
-}
-.hdr::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--accent),var(--teal),transparent);}
-.logo{font-size:1.5rem;font-weight:900;letter-spacing:4px;
-  background:linear-gradient(135deg,#4d9fff,#00d4aa);-webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;background-clip:text;}
-.tag{font-size:.62rem;color:var(--teal);letter-spacing:2.5px;text-transform:uppercase;margin-top:4px;}
-.body{padding:28px 32px;display:flex;flex-direction:column;gap:22px;}
-.why{font-size:.75rem;color:var(--silver);line-height:1.8;
-  background:rgba(0,212,170,.05);border:1px solid rgba(0,212,170,.15);
-  border-radius:12px;padding:14px 16px;}
-.why strong{color:var(--teal);}
-.steps{display:flex;flex-direction:column;gap:18px;}
-.step{display:flex;gap:14px;align-items:flex-start;}
-.num{width:26px;height:26px;border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--teal));
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;font-weight:700;flex-shrink:0;color:#fff;margin-top:1px;}
-.step-body{flex:1;}
-.step-title{font-size:.88rem;color:var(--text);margin-bottom:5px;
-  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;}
-.step-desc{font-size:.74rem;color:var(--silver);line-height:1.7;}
-.bm-zone{
-  background:rgba(77,159,255,.05);border:2px dashed rgba(77,159,255,.3);
-  border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;
-  margin-top:8px;
-}
-.bm-link{
-  display:inline-block;flex-shrink:0;
-  background:linear-gradient(135deg,var(--accent),var(--teal));
-  border-radius:10px;padding:12px 20px;color:#fff;font-family:'DM Mono',monospace;
-  font-size:.72rem;font-weight:700;letter-spacing:1px;text-decoration:none;
-  white-space:nowrap;cursor:grab;box-shadow:0 4px 20px rgba(77,159,255,.3);
-}
-.bm-hint{font-size:.72rem;color:var(--silver);line-height:1.7;}
-.bm-hint strong{color:var(--text);}
-.or{text-align:center;font-size:.65rem;color:var(--silver);letter-spacing:3px;opacity:.5;position:relative;}
-.or::before,.or::after{content:'';position:absolute;top:50%;width:43%;height:1px;background:rgba(77,159,255,.1);}
-.or::before{left:0;}.or::after{right:0;}
-.console-label{font-size:.63rem;color:var(--silver);letter-spacing:2px;text-transform:uppercase;
-  display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.console-label::after{content:'';flex:1;height:1px;background:rgba(77,159,255,.1);}
-.code-box{
-  background:rgba(5,8,18,.9);border:1px solid rgba(77,159,255,.15);border-radius:10px;
-  padding:14px 16px;font-size:.66rem;color:#a8c8ff;line-height:1.6;
-  max-height:110px;overflow-y:auto;word-break:break-all;cursor:text;user-select:all;
-}
-.copy-btn{
-  width:100%;margin-top:8px;background:rgba(77,159,255,.1);
-  border:1px solid rgba(77,159,255,.25);border-radius:9px;padding:11px;
-  color:var(--accent);font-family:'DM Mono',monospace;font-size:.68rem;
-  letter-spacing:1.5px;cursor:pointer;transition:all .15s;text-transform:uppercase;
-}
-.copy-btn:hover{background:rgba(77,159,255,.2);}
-.copy-btn.ok{color:var(--teal);border-color:rgba(0,212,170,.3);background:rgba(0,212,170,.08);}
+  :root {
+    --navy: #0a0e1a; --navy2: #0f1528; --accent: #4d9fff; --teal: #00d4aa;
+    --silver: #8899bb; --text: #ddeeff; --orb: 'Syne', sans-serif; --mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: radial-gradient(ellipse at center, #0f1528 0%, #050810 100%);
+    color: var(--text); font-family: var(--mono); min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; padding: 60px 20px;
+    background-attachment: fixed;
+  }
+  .logo {
+    font-family: var(--orb); font-size: 2.8rem; font-weight: 900;
+    background: linear-gradient(135deg, #4d9fff, #00d4aa, #7bbfff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    letter-spacing: 6px; margin-bottom: 6px;
+  }
+  .sub { font-size: .75rem; color: var(--silver); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 52px; }
+  .card {
+    background: linear-gradient(145deg, rgba(15,21,40,.98), rgba(10,14,26,.99));
+    border: 1px solid rgba(77,159,255,.25); border-radius: 18px;
+    padding: 36px 40px; width: min(640px, 94vw); margin-bottom: 20px;
+    position: relative; overflow: hidden;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--teal), transparent);
+  }
+  .step-num {
+    font-family: var(--orb); font-size: .6rem; color: var(--teal);
+    letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; opacity: .8;
+  }
+  .step-title { font-family: var(--orb); font-size: 1rem; color: var(--text); margin-bottom: 14px; font-weight: 700; }
+  .step-body { font-size: .82rem; color: var(--silver); line-height: 1.75; }
+  .step-body kbd {
+    background: rgba(77,159,255,.1); border: 1px solid rgba(77,159,255,.25);
+    border-radius: 5px; padding: 2px 8px; color: var(--accent); font-size: .78rem;
+  }
+  .bookmarklet {
+    display: inline-block; margin: 20px 0 6px;
+    background: linear-gradient(135deg, var(--accent), var(--teal));
+    border-radius: 10px; padding: 12px 24px;
+    color: #fff; font-family: var(--orb); font-size: .7rem; font-weight: 700;
+    letter-spacing: 1.5px; text-decoration: none; cursor: grab;
+    box-shadow: 0 6px 24px rgba(77,159,255,.3); transition: all .2s;
+  }
+  .bookmarklet:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(77,159,255,.4); }
+  .drag-hint { font-size: .72rem; color: var(--silver); opacity: .65; }
+  .divider {
+    display: flex; align-items: center; gap: 16px; margin: 24px 0;
+    font-size: .7rem; color: var(--silver); letter-spacing: 2px; opacity: .5;
+  }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(77,159,255,.15); }
+  .code-block {
+    background: rgba(5,8,18,.8); border: 1px solid rgba(77,159,255,.15);
+    border-radius: 10px; padding: 16px; font-size: .72rem; color: #aabbdd;
+    line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-all;
+    max-height: 160px; overflow-y: auto; margin-top: 14px;
+    scrollbar-width: thin; scrollbar-color: rgba(77,159,255,.3) transparent;
+    cursor: text; user-select: all;
+  }
+  .copy-btn {
+    display: block; width: 100%; margin-top: 10px;
+    background: rgba(77,159,255,.08); border: 1px solid rgba(77,159,255,.2);
+    border-radius: 8px; padding: 10px; color: var(--accent);
+    font-family: var(--mono); font-size: .75rem; cursor: pointer;
+    transition: all .15s; letter-spacing: 1px;
+  }
+  .copy-btn:hover { background: rgba(77,159,255,.15); }
+  .seeds-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .seed-tag {
+    background: rgba(0,212,170,.06); border: 1px solid rgba(0,212,170,.2);
+    border-radius: 999px; padding: 4px 14px;
+    font-size: .72rem; color: var(--teal); letter-spacing: .5px;
+  }
+  footer { font-size: .65rem; color: var(--silver); opacity: .4; margin-top: 32px; letter-spacing: 1px; }
 </style>
 </head>
 <body>
+
+<div class="logo">VEDA</div>
+<div class="sub">// Dev Seeder v3 — Bookmarklet</div>
+
+<!-- STEP 1 -->
 <div class="card">
-  <div class="hdr">
-    <div class="logo">VEDA</div>
-    <div class="tag">// Dev Seeder v2 — Bookmarklet</div>
-  </div>
-  <div class="body">
-
-    
-
-    <div class="steps">
-
-      <div class="step">
-        <div class="num">1</div>
-        <div class="step-body">
-          <div class="step-title">Show your bookmarks bar</div>
-          <div class="step-desc">
-            <strong style="color:var(--text)">Mac:</strong> Cmd+Shift+B &nbsp;·&nbsp;
-            <strong style="color:var(--text)">Windows:</strong> Ctrl+Shift+B &nbsp;·&nbsp;
-            <strong style="color:var(--text)">Chrome:</strong> ⋮ → Bookmarks → Show bookmarks bar
-          </div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="num">2</div>
-        <div class="step-body">
-          <div class="step-title">Drag the button into your bookmarks bar</div>
-          <div class="bm-zone">
-            <a class="bm-link" id="bm-link" href="javascript:(function(){var N=Date.now();function sd(n){var d=new Date();d.setDate(d.getDate()-n);return d.toLocaleDateString('en-GB');}var a={&quot;name&quot;:&quot;User&quot;,&quot;avatar&quot;:&quot;🎓&quot;,&quot;gems&quot;:847,&quot;streak&quot;:14,&quot;level&quot;:8,&quot;xp&quot;:3240,&quot;stats&quot;:{&quot;questions&quot;:94,&quot;notes&quot;:47,&quot;games&quot;:63,&quot;pomodoro&quot;:28,&quot;todoDone&quot;:31,&quot;tabsVisited&quot;:13},&quot;badges&quot;:[&quot;first_question&quot;,&quot;note_taker&quot;,&quot;gamer&quot;,&quot;streak_3&quot;,&quot;streak_7&quot;,&quot;streak_14&quot;,&quot;gem_50&quot;,&quot;gem_100&quot;,&quot;gem_500&quot;,&quot;pomodoro_5&quot;,&quot;todo_10&quot;,&quot;explorer&quot;,&quot;flashcard_master&quot;],&quot;shopOwned&quot;:{&quot;theme_aurora&quot;:true,&quot;theme_galaxy&quot;:true,&quot;border_gold&quot;:true,&quot;border_purple&quot;:true}};var j=[{id:N-1,date:sd(0),time:'21:14',mood:'😤',moodLabel:'Stressed',title:'Pre-exam anxiety is real',text:'Physics exam is tomorrow and I feel like I have forgotten everything. Went through the electricity chapter again tonight and it felt like reading it for the first time. Going to try the Veda flashcards and hope it clicks. Trying not to spiral. Deep breaths.'},{id:N-2,date:sd(1),time:'18:30',mood:'😊',moodLabel:'Happy',title:'Chemistry win!',text:'Got my Chemistry coursework back and I got an A! I could not believe it — I thought I messed up the conclusion but my analysis was strong. Ms. Tan wrote excellent use of data and clear scientific reasoning which made my whole week. Celebrated with bubble tea.'},{id:N-3,date:sd(2),time:'20:00',mood:'😴',moodLabel:'Tired',title:'Running on empty',text:'Really drained today. Football practice in the morning, three classes back-to-back, then tried a Pomodoro session but kept zoning out after 25 minutes. Need to start sleeping earlier. Tomorrow is a new day.'},{id:N-4,date:sd(4),time:'17:45',mood:'🔥',moodLabel:'Motivated',title:'In the zone — 4 hour session',text:'Most productive study session in ages. Started at 2pm, did not stop until 6. Used the Pomodoro timer properly — four 25-minute blocks. Finished French Revolution notes AND started the practice essay. The Veda mind map feature is genuinely great for this topic. 14-day streak feels incredible.'},{id:N-5,date:sd(5),time:'22:00',mood:'😐',moodLabel:'Meh',title:'Meh kind of day',text:'Medium day. Got through the maths worksheet but it took twice as long as it should. Ate dinner too late and now need to review English annotations. Might just do 20 minutes and call it.'},{id:N-6,date:sd(6),time:'19:00',mood:'😊',moodLabel:'Happy',title:'Library study + flag quiz wins',text:'Studied with Priya at the library for two hours. So much easier to focus with someone else there. Quizzed each other on the periodic table and got 18/20 — my best yet. Then played Flag Quiz on Veda to wind down and got 22 which is apparently a high score. Good evening.'},{id:N-7,date:sd(8),time:'21:30',mood:'😤',moodLabel:'Stressed',title:'Three assessments incoming',text:'Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — helped me realise it is manageable if I spread it out. Talked to Companion and it helped me calm down. Going to sleep instead of cramming.'},{id:N-8,date:sd(10),time:'16:20',mood:'🔥',moodLabel:'Motivated',title:'Essay done and submitted',text:'English essay submitted! Spent about 6 hours on it across three days and I am actually proud of it. The intro about symbolism of light in Macbeth came together really well. Used the Veda essay plan tool to structure my arguments — saved so much time. Handed in with an hour to spare.'},{id:N-9,date:sd(12),time:'20:45',mood:'😊',moodLabel:'Happy',title:'Two weeks in and loving it',text:'Been using Veda every single day for two weeks now. It started as just a homework helper but I genuinely look forward to opening it. The journal especially — never thought I would be someone who journals but having a space to brain-dump is really helpful. Streak at 12 days. Goal: hit 30.'},{id:N-10,date:sd(14),time:'18:00',mood:'😴',moodLabel:'Tired',title:'Rest day (needed it)',text:'Revision is a marathon and I am starting to feel it. Took a proper break today — no studying, just a walk and TV. Felt guilty the whole time but it was genuinely necessary. Coming back tomorrow with a fresh plan. Rest is productive.'},{id:N-11,date:sd(17),time:'21:00',mood:'🔥',moodLabel:'Motivated',title:'93% on mock — personal best!',text:'First ever 90+ on a mock paper! Got 93% on Chemistry MCQ. The flashcard sessions on Veda must be working because recall felt almost automatic on the bonding questions. Teacher said my explanations were detailed and well-structured. Keeping the same routine.'},{id:N-12,date:sd(20),time:'17:00',mood:'😐',moodLabel:'Okay',title:'Day 1 — new term, new goals',text:'First journal entry! Starting to track moods and study days. Goal this term: hit target grades, keep streak going, stay on top of homework instead of last-minute rushing. Staying consistent. Here we go.'}];var ch=[{role:'user',parts:[{text:'I am feeling really overwhelmed with everything right now'}]},{role:'model',parts:[{text:'That sounds genuinely exhausting. What is weighing on you most — school stuff or life stuff in general?'}]},{role:'user',parts:[{text:'Mostly school, three assessments this week and I have not slept properly in days'}]},{role:'model',parts:[{text:'Three in one week is a lot, no wonder your brain is fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep. Is there any way to protect even 7 hours tonight?'}]},{role:'user',parts:[{text:'probably not but I will try. can you help me with history revision'}]},{role:'model',parts:[{text:'Of course! What topic? Quiz, summary, or something that is not clicking?'}]},{role:'user',parts:[{text:'French Revolution, causes for the essay'}]},{role:'model',parts:[{text:'Examiners love causes questions. Main ones: financial crisis from funding the American Revolution, social inequality — Third Estate paid all taxes, weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?'}]},{role:'user',parts:[{text:'quiz me!'}]},{role:'model',parts:[{text:'Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?'}]},{role:'user',parts:[{text:'The American War of Independence? Because they spent loads of money?'}]},{role:'model',parts:[{text:'Exactly right. Key thing for your essay: France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link gets you top marks. Next: who made up the Third Estate and why were they angry?'}]}];var t=[{id:N-100,text:'Complete biology past papers (x3)',done:true,created:sd(5)},{id:N-101,text:'Submit English essay on Macbeth',done:true,created:sd(10)},{id:N-102,text:'Review French Revolution notes',done:true,created:sd(4)},{id:N-103,text:'Make Chemistry flashcards — bonding chapter',done:true,created:sd(3)},{id:N-104,text:'Pomodoro session: 4 blocks',done:true,created:sd(1)},{id:N-105,text:'Revise electricity formulas for Physics exam',done:false,created:sd(0)},{id:N-106,text:'Read chapters 5-7 for English lit',done:false,created:sd(0)},{id:N-107,text:'Email Mr. Hassan about coursework deadline',done:false,created:sd(1)}];var g=[{id:1,text:'Study at least 2 hours per day',done:true},{id:2,text:'Complete all homework before 9pm',done:true},{id:3,text:'Finish 3 past papers this week',done:true},{id:4,text:'Keep streak above 14 days',done:false},{id:5,text:'Get above 80% on next mock',done:false}];var al={};for(var i=0;i&lt;14;i++){var dd=new Date();dd.setDate(dd.getDate()-i);var k=dd.toISOString().split('T')[0];al[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};}var pl=[{name:'Lo-fi Study',id:'37i9dQZF1DWWQRwui0ExPn',type:'playlist'},{name:'Deep Focus',id:'37i9dQZF1DX9sIqqvKsjEK',type:'playlist'},{name:'Coding Vibes',id:'37i9dQZF1DX5trt9i14X7j',type:'playlist'}];[['studly_account',JSON.stringify(a)],['studly_journal',JSON.stringify(j)],['studly_comp_history',JSON.stringify(ch)],['studly_todos',JSON.stringify(t)],['studly_goals',JSON.stringify(g)],['studly_activity_log',JSON.stringify(al)],['studly_playlists',JSON.stringify(pl)],['studly_quicknote','Physics exam tomorrow — review: V=IR, P=IV, series vs parallel. Do not forget calculator!'],['studly_onboarded','1'],['studly_sbpref','open'],['studly_fontsize','medium'],['studly_accent','#4d9fff'],['studly_uistyle','default'],['studly_tabs_visited',JSON.stringify(['home','homework','notes','study','chat','journal','todo','games','exam','calc','library','themes','settings'])],['hi_bubble','73'],['hi_scramble','18'],['hi_math','34'],['hi_typing','87'],['hi_reaction','214'],['hi_snake','420'],['hi_flags','22'],['hi_sudoku','950']].forEach(function(p){localStorage.setItem(p[0],p[1]);});alert('✅ Veda dev data seeded! Reloading...');location.reload();})();">⚡ Seed Veda</a>
-            <div class="bm-hint"><strong>← Drag this</strong> onto your bookmarks bar.<br>It's a script, not a link — it won't navigate anywhere.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="num">3</div>
-        <div class="step-body">
-          <div class="step-title">Go to veda-net.com, then click "⚡ Seed Veda"</div>
-          <div class="step-desc">The bookmarklet runs in veda-net.com's context, writes all demo data to its localStorage, then reloads. That's it — the app will be fully pre-populated.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="or">OR</div>
-
-    <div>
-      <div class="console-label">// Paste directly into DevTools console on veda-net.com</div>
-      <div class="code-box" id="code-box">javascript:(function(){var N=Date.now();function sd(n){var d=new Date();d.setDate(d.getDate()-n);return d.toLocaleDateString('en-GB');}var a={"name":"User","avatar":"🎓","gems":847,"streak":14,"level":8,"xp":3240,"stats":{"questions":94,"notes":47,"games":63,"pomodoro":28,"todoDone":31,"tabsVisited":13},"badges":["first_question","note_taker","gamer","streak_3","streak_7","streak_14","gem_50","gem_100","gem_500","pomodoro_5","todo_10","explorer","flashcard_master"],"shopOwned":{"theme_aurora":true,"theme_galaxy":true,"border_gold":true,"border_purple":true}};var j=[{id:N-1,date:sd(0),time:'21:14',mood:'😤',moodLabel:'Stressed',title:'Pre-exam anxiety is real',text:'Physics exam is tomorrow and I feel like I have forgotten everything. Went through the electricity chapter again tonight and it felt like reading it for the first time. Going to try the Veda flashcards and hope it clicks. Trying not to spiral. Deep breaths.'},{id:N-2,date:sd(1),time:'18:30',mood:'😊',moodLabel:'Happy',title:'Chemistry win!',text:'Got my Chemistry coursework back and I got an A! I could not believe it — I thought I messed up the conclusion but my analysis was strong. Ms. Tan wrote excellent use of data and clear scientific reasoning which made my whole week. Celebrated with bubble tea.'},{id:N-3,date:sd(2),time:'20:00',mood:'😴',moodLabel:'Tired',title:'Running on empty',text:'Really drained today. Football practice in the morning, three classes back-to-back, then tried a Pomodoro session but kept zoning out after 25 minutes. Need to start sleeping earlier. Tomorrow is a new day.'},{id:N-4,date:sd(4),time:'17:45',mood:'🔥',moodLabel:'Motivated',title:'In the zone — 4 hour session',text:'Most productive study session in ages. Started at 2pm, did not stop until 6. Used the Pomodoro timer properly — four 25-minute blocks. Finished French Revolution notes AND started the practice essay. The Veda mind map feature is genuinely great for this topic. 14-day streak feels incredible.'},{id:N-5,date:sd(5),time:'22:00',mood:'😐',moodLabel:'Meh',title:'Meh kind of day',text:'Medium day. Got through the maths worksheet but it took twice as long as it should. Ate dinner too late and now need to review English annotations. Might just do 20 minutes and call it.'},{id:N-6,date:sd(6),time:'19:00',mood:'😊',moodLabel:'Happy',title:'Library study + flag quiz wins',text:'Studied with Priya at the library for two hours. So much easier to focus with someone else there. Quizzed each other on the periodic table and got 18/20 — my best yet. Then played Flag Quiz on Veda to wind down and got 22 which is apparently a high score. Good evening.'},{id:N-7,date:sd(8),time:'21:30',mood:'😤',moodLabel:'Stressed',title:'Three assessments incoming',text:'Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — helped me realise it is manageable if I spread it out. Talked to Companion and it helped me calm down. Going to sleep instead of cramming.'},{id:N-8,date:sd(10),time:'16:20',mood:'🔥',moodLabel:'Motivated',title:'Essay done and submitted',text:'English essay submitted! Spent about 6 hours on it across three days and I am actually proud of it. The intro about symbolism of light in Macbeth came together really well. Used the Veda essay plan tool to structure my arguments — saved so much time. Handed in with an hour to spare.'},{id:N-9,date:sd(12),time:'20:45',mood:'😊',moodLabel:'Happy',title:'Two weeks in and loving it',text:'Been using Veda every single day for two weeks now. It started as just a homework helper but I genuinely look forward to opening it. The journal especially — never thought I would be someone who journals but having a space to brain-dump is really helpful. Streak at 12 days. Goal: hit 30.'},{id:N-10,date:sd(14),time:'18:00',mood:'😴',moodLabel:'Tired',title:'Rest day (needed it)',text:'Revision is a marathon and I am starting to feel it. Took a proper break today — no studying, just a walk and TV. Felt guilty the whole time but it was genuinely necessary. Coming back tomorrow with a fresh plan. Rest is productive.'},{id:N-11,date:sd(17),time:'21:00',mood:'🔥',moodLabel:'Motivated',title:'93% on mock — personal best!',text:'First ever 90+ on a mock paper! Got 93% on Chemistry MCQ. The flashcard sessions on Veda must be working because recall felt almost automatic on the bonding questions. Teacher said my explanations were detailed and well-structured. Keeping the same routine.'},{id:N-12,date:sd(20),time:'17:00',mood:'😐',moodLabel:'Okay',title:'Day 1 — new term, new goals',text:'First journal entry! Starting to track moods and study days. Goal this term: hit target grades, keep streak going, stay on top of homework instead of last-minute rushing. Staying consistent. Here we go.'}];var ch=[{role:'user',parts:[{text:'I am feeling really overwhelmed with everything right now'}]},{role:'model',parts:[{text:'That sounds genuinely exhausting. What is weighing on you most — school stuff or life stuff in general?'}]},{role:'user',parts:[{text:'Mostly school, three assessments this week and I have not slept properly in days'}]},{role:'model',parts:[{text:'Three in one week is a lot, no wonder your brain is fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep. Is there any way to protect even 7 hours tonight?'}]},{role:'user',parts:[{text:'probably not but I will try. can you help me with history revision'}]},{role:'model',parts:[{text:'Of course! What topic? Quiz, summary, or something that is not clicking?'}]},{role:'user',parts:[{text:'French Revolution, causes for the essay'}]},{role:'model',parts:[{text:'Examiners love causes questions. Main ones: financial crisis from funding the American Revolution, social inequality — Third Estate paid all taxes, weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?'}]},{role:'user',parts:[{text:'quiz me!'}]},{role:'model',parts:[{text:'Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?'}]},{role:'user',parts:[{text:'The American War of Independence? Because they spent loads of money?'}]},{role:'model',parts:[{text:'Exactly right. Key thing for your essay: France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link gets you top marks. Next: who made up the Third Estate and why were they angry?'}]}];var t=[{id:N-100,text:'Complete biology past papers (x3)',done:true,created:sd(5)},{id:N-101,text:'Submit English essay on Macbeth',done:true,created:sd(10)},{id:N-102,text:'Review French Revolution notes',done:true,created:sd(4)},{id:N-103,text:'Make Chemistry flashcards — bonding chapter',done:true,created:sd(3)},{id:N-104,text:'Pomodoro session: 4 blocks',done:true,created:sd(1)},{id:N-105,text:'Revise electricity formulas for Physics exam',done:false,created:sd(0)},{id:N-106,text:'Read chapters 5-7 for English lit',done:false,created:sd(0)},{id:N-107,text:'Email Mr. Hassan about coursework deadline',done:false,created:sd(1)}];var g=[{id:1,text:'Study at least 2 hours per day',done:true},{id:2,text:'Complete all homework before 9pm',done:true},{id:3,text:'Finish 3 past papers this week',done:true},{id:4,text:'Keep streak above 14 days',done:false},{id:5,text:'Get above 80% on next mock',done:false}];var al={};for(var i=0;i&lt;14;i++){var dd=new Date();dd.setDate(dd.getDate()-i);var k=dd.toISOString().split('T')[0];al[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};}var pl=[{name:'Lo-fi Study',id:'37i9dQZF1DWWQRwui0ExPn',type:'playlist'},{name:'Deep Focus',id:'37i9dQZF1DX9sIqqvKsjEK',type:'playlist'},{name:'Coding Vibes',id:'37i9dQZF1DX5trt9i14X7j',type:'playlist'}];[['studly_account',JSON.stringify(a)],['studly_journal',JSON.stringify(j)],['studly_comp_history',JSON.stringify(ch)],['studly_todos',JSON.stringify(t)],['studly_goals',JSON.stringify(g)],['studly_activity_log',JSON.stringify(al)],['studly_playlists',JSON.stringify(pl)],['studly_quicknote','Physics exam tomorrow — review: V=IR, P=IV, series vs parallel. Do not forget calculator!'],['studly_onboarded','1'],['studly_sbpref','open'],['studly_fontsize','medium'],['studly_accent','#4d9fff'],['studly_uistyle','default'],['studly_tabs_visited',JSON.stringify(['home','homework','notes','study','chat','journal','todo','games','exam','calc','library','themes','settings'])],['hi_bubble','73'],['hi_scramble','18'],['hi_math','34'],['hi_typing','87'],['hi_reaction','214'],['hi_snake','420'],['hi_flags','22'],['hi_sudoku','950']].forEach(function(p){localStorage.setItem(p[0],p[1]);});alert('✅ Veda dev data seeded! Reloading...');location.reload();})();</div>
-      <button class="copy-btn" id="copy-btn" onclick="copyCode()">📋 Copy script to clipboard</button>
-    </div>
-
+  <div class="step-num">1</div>
+  <div class="step-title">Show your bookmarks bar</div>
+  <div class="step-body">
+    <b>Mac:</b> <kbd>Cmd+Shift+B</kbd> &nbsp;·&nbsp;
+    <b>Windows:</b> <kbd>Ctrl+Shift+B</kbd> &nbsp;·&nbsp;
+    <b>Chrome:</b> ⋮ → Bookmarks → Show bookmarks bar
   </div>
 </div>
 
-<script>
-// All the data, hardcoded so the bookmarklet is fully self-contained
-// (no closures over outer scope — must work as a standalone IIFE)
+<!-- STEP 2 -->
+<div class="card">
+  <div class="step-num">2</div>
+  <div class="step-title">Drag the button into your bookmarks bar</div>
+  <div class="step-body">
+    <a class="bookmarklet" id="bm-link" href="javascript:(function(){
+var N = Date.now();
+function sd(n) { var d=new Date(); d.setDate(d.getDate()-n); return d.toLocaleDateString('en-GB'); }
+function isoDay(n) { var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
 
-var SEED_SCRIPT = (function() {
-  var now = Date.now();
-  function sd(n) {
-    var d = new Date(); d.setDate(d.getDate()-n);
-    return d.toLocaleDateString('en-GB');
+/* ── ACCOUNT ── */
+var a = {
+  name: 'User',
+  avatar: '🎓',
+  gems: 1240,
+  streak: 30,
+  lastLogin: new Date().toDateString(),
+  level: 12,
+  xp: 5800,
+  stats: {
+    questions: 94,
+    notes: 52,
+    games: 63,
+    pomodoro: 28,
+    todoDone: 31,
+    tabsVisited: 14,
+    journal: 12,
+    flashcards: 55,
+    exams: 11
+  },
+  badges: {
+    first_q:     true,
+    streak3:     true,
+    streak7:     true,
+    streak14:    true,
+    streak30:    true,
+    gem100:      true,
+    gem500:      true,
+    gem1000:     true,
+    game5:       true,
+    game20:      true,
+    journal5:    true,
+    journal20:   false,
+    notes10:     true,
+    notes50:     true,
+    flash_master:true,
+    flash50:     true,
+    pom5:        true,
+    pom20:       true,
+    exam1:       true,
+    exam10:      true,
+    todo10:      true,
+    questions50: true,
+    all_tabs:    true
+  },
+  shopOwned: {
+    theme_aurora:  true,
+    theme_galaxy:  true,
+    border_gold:   true,
+    border_purple: true
   }
+};
 
-  var account = {
-    name:"User",avatar:"\uD83C\uDF93",gems:847,streak:14,level:8,xp:3240,
-    stats:{questions:94,notes:47,games:63,pomodoro:28,todoDone:31,tabsVisited:13},
-    badges:["first_question","note_taker","gamer","streak_3","streak_7","streak_14","gem_50","gem_100","gem_500","pomodoro_5","todo_10","explorer","flashcard_master"],
-    shopOwned:{theme_aurora:true,theme_galaxy:true,border_gold:true,border_purple:true}
-  };
+/* ── JOURNAL ── */
+var j = [
+  {id:N-1, date:sd(0), time:'21:14', mood:'😤', moodLabel:'Stressed', title:'Pre-exam anxiety is real', text:'Physics exam is tomorrow and I feel like I have forgotten everything. Went through the electricity chapter again tonight and it felt like reading it for the first time. Going to try the Veda flashcards and hope it clicks. Trying not to spiral. Deep breaths.'},
+  {id:N-2, date:sd(1), time:'18:30', mood:'😊', moodLabel:'Happy', title:'Chemistry win!', text:'Got my Chemistry coursework back and I got an A! I could not believe it — I thought I messed up the conclusion but my analysis was strong. Ms. Tan wrote excellent use of data and clear scientific reasoning which made my whole week. Celebrated with bubble tea.'},
+  {id:N-3, date:sd(2), time:'20:00', mood:'😴', moodLabel:'Tired', title:'Running on empty', text:'Really drained today. Football practice in the morning, three classes back-to-back, then tried a Pomodoro session but kept zoning out after 25 minutes. Need to start sleeping earlier. Tomorrow is a new day.'},
+  {id:N-4, date:sd(4), time:'17:45', mood:'🔥', moodLabel:'Motivated', title:'In the zone — 4 hour session', text:'Most productive study session in ages. Started at 2pm, did not stop until 6. Used the Pomodoro timer properly — four 25-minute blocks. Finished French Revolution notes AND started the practice essay. The Veda mind map feature is genuinely great for this topic. 30-day streak feels incredible.'},
+  {id:N-5, date:sd(5), time:'22:00', mood:'😐', moodLabel:'Meh', title:'Meh kind of day', text:'Medium day. Got through the maths worksheet but it took twice as long as it should. Ate dinner too late and now need to review English annotations. Might just do 20 minutes and call it.'},
+  {id:N-6, date:sd(6), time:'19:00', mood:'😊', moodLabel:'Happy', title:'Library study + flag quiz wins', text:'Studied with Priya at the library for two hours. So much easier to focus with someone else there. Quizzed each other on the periodic table and got 18/20 — my best yet. Then played Flag Quiz on Veda to wind down and got 22 which is apparently a high score. Good evening.'},
+  {id:N-7, date:sd(8), time:'21:30', mood:'😤', moodLabel:'Stressed', title:'Three assessments incoming', text:'Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — helped me realise it is manageable if I spread it out. Talked to Companion and it helped me calm down. Going to sleep instead of cramming.'},
+  {id:N-8, date:sd(10), time:'16:20', mood:'🔥', moodLabel:'Motivated', title:'Essay done and submitted', text:'English essay submitted! Spent about 6 hours on it across three days and I am actually proud of it. The intro about symbolism of light in Macbeth came together really well. Used the Veda essay plan tool to structure my arguments — saved so much time. Handed in with an hour to spare.'},
+  {id:N-9, date:sd(12), time:'20:45', mood:'😊', moodLabel:'Happy', title:'Two weeks in and loving it', text:'Been using Veda every single day for two weeks now. It started as just a homework helper but I genuinely look forward to opening it. The journal especially — never thought I would be someone who journals but having a space to brain-dump is really helpful. Streak at 12 days. Goal: hit 30.'},
+  {id:N-10, date:sd(14), time:'18:00', mood:'😴', moodLabel:'Tired', title:'Rest day (needed it)', text:'Revision is a marathon and I am starting to feel it. Took a proper break today — no studying, just a walk and TV. Felt guilty the whole time but it was genuinely necessary. Coming back tomorrow with a fresh plan. Rest is productive.'},
+  {id:N-11, date:sd(17), time:'21:00', mood:'🔥', moodLabel:'Motivated', title:'93% on mock — personal best!', text:'First ever 90+ on a mock paper! Got 93% on Chemistry MCQ. The flashcard sessions on Veda must be working because recall felt almost automatic on the bonding questions. Teacher said my explanations were detailed and well-structured. Keeping the same routine.'},
+  {id:N-12, date:sd(20), time:'17:00', mood:'😐', moodLabel:'Okay', title:'Day 1 — new term, new goals', text:'First journal entry! Starting to track moods and study days. Goal this term: hit target grades, keep streak going, stay on top of homework instead of last-minute rushing. Staying consistent. Here we go.'}
+];
 
-  var journal = [
-    {id:now-1,date:sd(0),time:"21:14",mood:"\uD83D\uDE24",moodLabel:"Stressed",title:"Pre-exam anxiety is real",text:"Physics exam is tomorrow and I honestly feel like I've forgotten everything. Went through the entire electricity chapter again tonight and it felt like I was reading it for the first time. The formulas just aren't sticking. I'm going to try the Veda flashcards for the last hour before bed and hope it clicks. At least I got through 3 past papers this week. Trying not to spiral. Deep breaths."},
-    {id:now-2,date:sd(1),time:"18:30",mood:"\uD83D\uDE0A",moodLabel:"Happy",title:"Chemistry win \uD83C\uDF89",text:"Got my Chemistry coursework back and I got an A! I literally could not believe it — I thought I had messed up the conclusion section but apparently my analysis was strong. Ms. Tan wrote 'excellent use of data and clear scientific reasoning' which honestly made my whole week. Celebrated with bubble tea after school."},
-    {id:now-3,date:sd(2),time:"20:00",mood:"\uD83D\uDE34",moodLabel:"Tired",title:"Running on empty",text:"Really drained today. Had football practice in the morning, three back-to-back classes, then tried to do a Pomodoro session in the evening but I kept zoning out. Managed 25 minutes before I gave up. I need to start sleeping earlier — I've been staying up past midnight too often. Tomorrow is a new day."},
-    {id:now-4,date:sd(4),time:"17:45",mood:"\uD83D\uDD25",moodLabel:"Motivated",title:"In the zone — 4 hour session",text:"Had the most productive study session in ages. Started at 2pm and didn't stop until 6. Used the Pomodoro timer properly — four 25-minute blocks with short breaks — and the focus was different. Finished all my history notes on the French Revolution AND started the practice essay. The Veda mind map feature is so good for this topic. 14-day streak feels incredible."},
-    {id:now-5,date:sd(5),time:"22:00",mood:"\uD83D\uDE10",moodLabel:"Meh",title:"Meh kind of day",text:"Medium day. Not bad, not great. Got through the maths worksheet but it took twice as long as it should have because my brain kept wandering. Ate dinner too late and now it's 10pm and I still need to review my English annotations. Might just do 20 minutes and call it."},
-    {id:now-6,date:sd(6),time:"19:00",mood:"\uD83D\uDE0A",moodLabel:"Happy",title:"Library study + flag quiz wins",text:"Went to the library after school with Priya and we studied together for two hours. It's so much easier to stay focused with someone else there. We quizzed each other on the periodic table and I got 18/20 which is my best yet. Then we played the Flag Quiz game on Veda to wind down — I got 22 which is apparently a high score. Good evening overall."},
-    {id:now-7,date:sd(8),time:"21:30",mood:"\uD83D\uDE24",moodLabel:"Stressed",title:"Three assessments incoming",text:"Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — it helped me realise it's actually manageable if I spread it out. But it still feels heavy. Talked to Companion for a bit and it helped me calm down. Going to sleep instead of cramming tonight."},
-    {id:now-8,date:sd(10),time:"16:20",mood:"\uD83D\uDD25",moodLabel:"Motivated",title:"Essay done and submitted \u2713",text:"English essay submitted! I spent about 6 hours on it across three days and I'm actually proud of how it turned out. The intro about the symbolism of light in Macbeth came together really well. Used Veda's essay plan tool to structure my arguments — saved me so much time. Handed it in with an hour to spare. Now I can breathe."},
-    {id:now-9,date:sd(12),time:"20:45",mood:"\uD83D\uDE0A",moodLabel:"Happy",title:"Two weeks in and loving it",text:"Realised I've been using Veda every single day for two weeks now. It started as just a homework helper but I actually look forward to opening it now. The journal especially — I never thought I'd be someone who journals but there's something about having a space to brain-dump that I really like. Streak is at 12 days. Setting a goal to hit 30."},
-    {id:now-10,date:sd(14),time:"18:00",mood:"\uD83D\uDE34",moodLabel:"Tired",title:"Rest day (needed it)",text:"Revision is a marathon and I'm starting to feel it. Took a proper break today — no studying, just went for a walk and watched TV. Felt guilty the whole time but I think it was genuinely necessary. Coming back tomorrow with a fresh plan. Reminder to self: rest is productive."},
-    {id:now-11,date:sd(17),time:"21:00",mood:"\uD83D\uDD25",moodLabel:"Motivated",title:"93% on mock — new personal best!",text:"First ever 90+ on a mock paper! Got 93% on a Chemistry MCQ test. Honestly shocked myself. The flashcard sessions I've been doing on Veda must be working because the recall felt almost automatic for most of the bonding questions. Teacher said my explanations were 'detailed and well-structured'. Going to keep the same routine."},
-    {id:now-12,date:sd(20),time:"17:00",mood:"\uD83D\uDE10",moodLabel:"Okay",title:"Day 1 — new term, new goals",text:"First journal entry! Decided to start tracking my moods and study days properly. Goal for this term: hit all my target grades, keep my streak going, and stay on top of homework instead of last-minute rushing. Big goals but I think I can do it if I stay consistent. Let's go."}
-  ];
+/* ── CHAT HISTORY ── */
+var ch = [
+  {role:'user',  parts:[{text:'I am feeling really overwhelmed with everything right now'}]},
+  {role:'model', parts:[{text:'That sounds genuinely exhausting. What is weighing on you most — school stuff or life stuff in general?'}]},
+  {role:'user',  parts:[{text:'Mostly school, three assessments this week and I have not slept properly in days'}]},
+  {role:'model', parts:[{text:'Three in one week is a lot, no wonder your brain is fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep. Is there any way to protect even 7 hours tonight?'}]},
+  {role:'user',  parts:[{text:'probably not but I will try. can you help me with history revision'}]},
+  {role:'model', parts:[{text:'Of course! What topic? Quiz, summary, or something that is not clicking?'}]},
+  {role:'user',  parts:[{text:'French Revolution, causes for the essay'}]},
+  {role:'model', parts:[{text:'Examiners love causes questions. Main ones: financial crisis from funding the American Revolution, social inequality — Third Estate paid all taxes, weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?'}]},
+  {role:'user',  parts:[{text:'quiz me!'}]},
+  {role:'model', parts:[{text:'Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?'}]},
+  {role:'user',  parts:[{text:'The American War of Independence? Because they spent loads of money?'}]},
+  {role:'model', parts:[{text:'Exactly right. Key thing for your essay: France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link gets you top marks. Next: who made up the Third Estate and why were they angry?'}]}
+];
 
-  var chat = [
-    {role:"user",parts:[{text:"I'm feeling really overwhelmed with everything right now"}]},
-    {role:"model",parts:[{text:"That sounds genuinely exhausting. What's weighing on you most right now? School stuff, or more life stuff in general?"}]},
-    {role:"user",parts:[{text:"Mostly school, three assessments this week and I haven't slept properly in days"}]},
-    {role:"model",parts:[{text:"Three in one week is a lot, no wonder your brain's fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep, so the all-nighter strategy kind of backfires. Is there any way to protect even 7 hours tonight?"}]},
-    {role:"user",parts:[{text:"probably not but I'll try. can you help me with my history revision"}]},
-    {role:"model",parts:[{text:"Of course! What topic? And do you want me to quiz you, help you make a summary, or just explain something that's not clicking?"}]},
-    {role:"user",parts:[{text:"French Revolution, causes for the essay"}]},
-    {role:"model",parts:[{text:"Good topic — examiners love causes questions. The main ones: financial crisis (France was nearly bankrupt after funding the American Revolution), social inequality (the Third Estate paid all the taxes), weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?"}]},
-    {role:"user",parts:[{text:"quiz me!"}]},
-    {role:"model",parts:[{text:"Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?"}]},
-    {role:"user",parts:[{text:"The American War of Independence? Because they spent loads of money?"}]},
-    {role:"model",parts:[{text:"Exactly right \u2713 The key thing to add in your essay is the consequence — France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link is what gets you top marks. Next: who made up the Third Estate, and why were they so angry?"}]}
-  ];
+/* ── TODOS ── */
+var t = [
+  {id:N-100, text:'Complete biology past papers (x3)', done:true,  created:sd(5)},
+  {id:N-101, text:'Submit English essay on Macbeth',   done:true,  created:sd(10)},
+  {id:N-102, text:'Review French Revolution notes',    done:true,  created:sd(4)},
+  {id:N-103, text:'Make Chemistry flashcards — bonding chapter', done:true, created:sd(3)},
+  {id:N-104, text:'Pomodoro session: 4 blocks',        done:true,  created:sd(1)},
+  {id:N-105, text:'Revise electricity formulas for Physics exam', done:false, created:sd(0)},
+  {id:N-106, text:'Read chapters 5-7 for English lit', done:false, created:sd(0)},
+  {id:N-107, text:'Email Mr. Hassan about coursework deadline', done:false, created:sd(1)}
+];
 
-  var todos = [
-    {id:now-100,text:"Complete biology past papers (x3)",done:true,created:sd(5)},
-    {id:now-101,text:"Submit English essay on Macbeth",done:true,created:sd(10)},
-    {id:now-102,text:"Review French Revolution notes",done:true,created:sd(4)},
-    {id:now-103,text:"Make Chemistry flashcards — bonding chapter",done:true,created:sd(3)},
-    {id:now-104,text:"Pomodoro session: 4 blocks",done:true,created:sd(1)},
-    {id:now-105,text:"Revise electricity formulas for Physics exam",done:false,created:sd(0)},
-    {id:now-106,text:"Read chapters 5-7 for English lit",done:false,created:sd(0)},
-    {id:now-107,text:"Email Mr. Hassan about coursework deadline",done:false,created:sd(1)}
-  ];
+/* ── GOALS ── */
+var g = [
+  {id:1, text:'Study at least 2 hours per day',   done:true},
+  {id:2, text:'Complete all homework before 9pm', done:true},
+  {id:3, text:'Finish 3 past papers this week',   done:true},
+  {id:4, text:'Keep streak above 30 days',        done:true},
+  {id:5, text:'Get above 80% on next mock',       done:false}
+];
 
-  var goals = [
-    {id:1,text:"Study at least 2 hours per day",done:true},
-    {id:2,text:"Complete all homework before 9pm",done:true},
-    {id:3,text:"Finish 3 past papers this week",done:true},
-    {id:4,text:"Keep streak above 14 days",done:false},
-    {id:5,text:"Get above 80% on next mock",done:false}
-  ];
-
-  var actLog = {};
-  for(var i=0;i<14;i++){
-    var d=new Date();d.setDate(d.getDate()-i);
-    var k=d.toISOString().split("T")[0];
-    actLog[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};
-  }
-
-  var playlists=[
-    {name:"Lo-fi Study",id:"37i9dQZF1DWWQRwui0ExPn",type:"playlist"},
-    {name:"Deep Focus",id:"37i9dQZF1DX9sIqqvKsjEK",type:"playlist"},
-    {name:"Coding Vibes",id:"37i9dQZF1DX5trt9i14X7j",type:"playlist"}
-  ];
-
-  var items=[
-    ["studly_account",JSON.stringify(account)],
-    ["studly_journal",JSON.stringify(journal)],
-    ["studly_comp_history",JSON.stringify(chat)],
-    ["studly_todos",JSON.stringify(todos)],
-    ["studly_goals",JSON.stringify(goals)],
-    ["studly_activity_log",JSON.stringify(actLog)],
-    ["studly_playlists",JSON.stringify(playlists)],
-    ["studly_quicknote","Physics exam tomorrow \u2014 review: V=IR, P=IV, series vs parallel. Don't forget calculator!"],
-    ["studly_onboarded","1"],
-    ["studly_sbpref","open"],
-    ["studly_fontsize","medium"],
-    ["studly_accent","#4d9fff"],
-    ["studly_uistyle","default"],
-    ["studly_tabs_visited",JSON.stringify(["home","homework","notes","study","chat","journal","todo","games","exam","calc","library","themes","settings"])],
-    ["hi_bubble","73"],["hi_scramble","18"],["hi_math","34"],["hi_typing","87"],
-    ["hi_reaction","214"],["hi_snake","420"],["hi_flags","22"],["hi_sudoku","950"]
-  ];
-
-  items.forEach(function(p){localStorage.setItem(p[0],p[1]);});
-  alert("\u2705 Veda seeded! "+items.length+" items written.\n\nReloading now...");
-  location.reload();
-
-  // Return a string version for display/copy
-  return null;
-}).toString();
-
-// Extract the body of the IIFE for display and bookmarklet use
-// We'll just stringify everything fresh as a compact script string
-function buildBookmarklet() {
-  // Build a clean self-contained script string
-  var parts = [];
-
-  // Helper
-  parts.push("var N=Date.now();");
-  parts.push("function sd(n){var d=new Date();d.setDate(d.getDate()-n);return d.toLocaleDateString('en-GB');}");
-
-  // Data objects as JSON literals
-  var account = {name:"User",avatar:"🎓",gems:847,streak:14,level:8,xp:3240,stats:{questions:94,notes:47,games:63,pomodoro:28,todoDone:31,tabsVisited:13},badges:["first_question","note_taker","gamer","streak_3","streak_7","streak_14","gem_50","gem_100","gem_500","pomodoro_5","todo_10","explorer","flashcard_master"],shopOwned:{theme_aurora:true,theme_galaxy:true,border_gold:true,border_purple:true}};
-
-  parts.push("var a="+JSON.stringify(account)+";");
-  parts.push("var j=[{id:N-1,date:sd(0),time:'21:14',mood:'😤',moodLabel:'Stressed',title:'Pre-exam anxiety is real',text:'Physics exam is tomorrow and I feel like I have forgotten everything. Went through the electricity chapter again tonight and it felt like reading it for the first time. Going to try the Veda flashcards and hope it clicks. Trying not to spiral. Deep breaths.'},{id:N-2,date:sd(1),time:'18:30',mood:'😊',moodLabel:'Happy',title:'Chemistry win!',text:'Got my Chemistry coursework back and I got an A! I could not believe it — I thought I messed up the conclusion but my analysis was strong. Ms. Tan wrote excellent use of data and clear scientific reasoning which made my whole week. Celebrated with bubble tea.'},{id:N-3,date:sd(2),time:'20:00',mood:'😴',moodLabel:'Tired',title:'Running on empty',text:'Really drained today. Football practice in the morning, three classes back-to-back, then tried a Pomodoro session but kept zoning out after 25 minutes. Need to start sleeping earlier. Tomorrow is a new day.'},{id:N-4,date:sd(4),time:'17:45',mood:'🔥',moodLabel:'Motivated',title:'In the zone — 4 hour session',text:'Most productive study session in ages. Started at 2pm, did not stop until 6. Used the Pomodoro timer properly — four 25-minute blocks. Finished French Revolution notes AND started the practice essay. The Veda mind map feature is genuinely great for this topic. 14-day streak feels incredible.'},{id:N-5,date:sd(5),time:'22:00',mood:'😐',moodLabel:'Meh',title:'Meh kind of day',text:'Medium day. Got through the maths worksheet but it took twice as long as it should. Ate dinner too late and now need to review English annotations. Might just do 20 minutes and call it.'},{id:N-6,date:sd(6),time:'19:00',mood:'😊',moodLabel:'Happy',title:'Library study + flag quiz wins',text:'Studied with Priya at the library for two hours. So much easier to focus with someone else there. Quizzed each other on the periodic table and got 18/20 — my best yet. Then played Flag Quiz on Veda to wind down and got 22 which is apparently a high score. Good evening.'},{id:N-7,date:sd(8),time:'21:30',mood:'😤',moodLabel:'Stressed',title:'Three assessments incoming',text:'Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — helped me realise it is manageable if I spread it out. Talked to Companion and it helped me calm down. Going to sleep instead of cramming.'},{id:N-8,date:sd(10),time:'16:20',mood:'🔥',moodLabel:'Motivated',title:'Essay done and submitted',text:'English essay submitted! Spent about 6 hours on it across three days and I am actually proud of it. The intro about symbolism of light in Macbeth came together really well. Used the Veda essay plan tool to structure my arguments — saved so much time. Handed in with an hour to spare.'},{id:N-9,date:sd(12),time:'20:45',mood:'😊',moodLabel:'Happy',title:'Two weeks in and loving it',text:'Been using Veda every single day for two weeks now. It started as just a homework helper but I genuinely look forward to opening it. The journal especially — never thought I would be someone who journals but having a space to brain-dump is really helpful. Streak at 12 days. Goal: hit 30.'},{id:N-10,date:sd(14),time:'18:00',mood:'😴',moodLabel:'Tired',title:'Rest day (needed it)',text:'Revision is a marathon and I am starting to feel it. Took a proper break today — no studying, just a walk and TV. Felt guilty the whole time but it was genuinely necessary. Coming back tomorrow with a fresh plan. Rest is productive.'},{id:N-11,date:sd(17),time:'21:00',mood:'🔥',moodLabel:'Motivated',title:'93% on mock — personal best!',text:'First ever 90+ on a mock paper! Got 93% on Chemistry MCQ. The flashcard sessions on Veda must be working because recall felt almost automatic on the bonding questions. Teacher said my explanations were detailed and well-structured. Keeping the same routine.'},{id:N-12,date:sd(20),time:'17:00',mood:'😐',moodLabel:'Okay',title:'Day 1 — new term, new goals',text:'First journal entry! Starting to track moods and study days. Goal this term: hit target grades, keep streak going, stay on top of homework instead of last-minute rushing. Staying consistent. Here we go.'}];");
-  parts.push("var ch=[{role:'user',parts:[{text:'I am feeling really overwhelmed with everything right now'}]},{role:'model',parts:[{text:'That sounds genuinely exhausting. What is weighing on you most — school stuff or life stuff in general?'}]},{role:'user',parts:[{text:'Mostly school, three assessments this week and I have not slept properly in days'}]},{role:'model',parts:[{text:'Three in one week is a lot, no wonder your brain is fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep. Is there any way to protect even 7 hours tonight?'}]},{role:'user',parts:[{text:'probably not but I will try. can you help me with history revision'}]},{role:'model',parts:[{text:'Of course! What topic? Quiz, summary, or something that is not clicking?'}]},{role:'user',parts:[{text:'French Revolution, causes for the essay'}]},{role:'model',parts:[{text:'Examiners love causes questions. Main ones: financial crisis from funding the American Revolution, social inequality — Third Estate paid all taxes, weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?'}]},{role:'user',parts:[{text:'quiz me!'}]},{role:'model',parts:[{text:'Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?'}]},{role:'user',parts:[{text:'The American War of Independence? Because they spent loads of money?'}]},{role:'model',parts:[{text:'Exactly right. Key thing for your essay: France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link gets you top marks. Next: who made up the Third Estate and why were they angry?'}]}];");
-  parts.push("var t=[{id:N-100,text:'Complete biology past papers (x3)',done:true,created:sd(5)},{id:N-101,text:'Submit English essay on Macbeth',done:true,created:sd(10)},{id:N-102,text:'Review French Revolution notes',done:true,created:sd(4)},{id:N-103,text:'Make Chemistry flashcards — bonding chapter',done:true,created:sd(3)},{id:N-104,text:'Pomodoro session: 4 blocks',done:true,created:sd(1)},{id:N-105,text:'Revise electricity formulas for Physics exam',done:false,created:sd(0)},{id:N-106,text:'Read chapters 5-7 for English lit',done:false,created:sd(0)},{id:N-107,text:'Email Mr. Hassan about coursework deadline',done:false,created:sd(1)}];");
-  parts.push("var g=[{id:1,text:'Study at least 2 hours per day',done:true},{id:2,text:'Complete all homework before 9pm',done:true},{id:3,text:'Finish 3 past papers this week',done:true},{id:4,text:'Keep streak above 14 days',done:false},{id:5,text:'Get above 80% on next mock',done:false}];");
-  parts.push("var al={};for(var i=0;i<14;i++){var dd=new Date();dd.setDate(dd.getDate()-i);var k=dd.toISOString().split('T')[0];al[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};}");
-  parts.push("var pl=[{name:'Lo-fi Study',id:'37i9dQZF1DWWQRwui0ExPn',type:'playlist'},{name:'Deep Focus',id:'37i9dQZF1DX9sIqqvKsjEK',type:'playlist'},{name:'Coding Vibes',id:'37i9dQZF1DX5trt9i14X7j',type:'playlist'}];");
-  parts.push("[['studly_account',JSON.stringify(a)],['studly_journal',JSON.stringify(j)],['studly_comp_history',JSON.stringify(ch)],['studly_todos',JSON.stringify(t)],['studly_goals',JSON.stringify(g)],['studly_activity_log',JSON.stringify(al)],['studly_playlists',JSON.stringify(pl)],['studly_quicknote','Physics exam tomorrow — review: V=IR, P=IV, series vs parallel. Do not forget calculator!'],['studly_onboarded','1'],['studly_sbpref','open'],['studly_fontsize','medium'],['studly_accent','#4d9fff'],['studly_uistyle','default'],['studly_tabs_visited',JSON.stringify(['home','homework','notes','study','chat','journal','todo','games','exam','calc','library','themes','settings'])],['hi_bubble','73'],['hi_scramble','18'],['hi_math','34'],['hi_typing','87'],['hi_reaction','214'],['hi_snake','420'],['hi_flags','22'],['hi_sudoku','950']].forEach(function(p){localStorage.setItem(p[0],p[1]);});");
-  parts.push("alert('✅ Veda dev data seeded! Reloading...');location.reload();");
-
-  return "javascript:(function(){" + parts.join("") + "})();";
+/* ── ACTIVITY LOG (14 days) ── */
+var al = {};
+for (var i=0;i&lt;14;i++) {
+  var dd=new Date(); dd.setDate(dd.getDate()-i);
+  var k=dd.toISOString().split('T')[0];
+  al[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};
 }
 
-var bookmarklet = buildBookmarklet();
-document.getElementById('bm-link').href = bookmarklet;
-document.getElementById('code-box').textContent = bookmarklet;
+/* ── PLAYLISTS ── */
+var pl = [
+  {name:'Lo-fi Study',   id:'37i9dQZF1DWWQRwui0ExPn', type:'playlist'},
+  {name:'Deep Focus',    id:'37i9dQZF1DX9sIqqvKsjEK', type:'playlist'},
+  {name:'Coding Vibes',  id:'37i9dQZF1DX5trt9i14X7j', type:'playlist'}
+];
 
-function copyCode() {
-  navigator.clipboard.writeText(bookmarklet).then(function(){
-    var b = document.getElementById('copy-btn');
-    b.textContent = '✓ Copied! Paste it into DevTools console on veda-net.com';
-    b.classList.add('ok');
-    setTimeout(function(){ b.textContent = '📋 Copy script to clipboard'; b.classList.remove('ok'); }, 3000);
+/* ── STUDY PLANNER (veda_planner) ── */
+/* Event shape: { id, subject, date (YYYY-MM-DD), startTime (HH:MM), dur (minutes), notes, cc (colour class), priority, repeatDays:[] } */
+var plannerEvents = [
+  /* This week — recurring subjects */
+  {id:N+1,  subject:'Mathematics',    date:isoDay(-6), startTime:'08:00', dur:60,  notes:'Quadratic equations — past paper Q1-5', cc:'ec-maths',    priority:'high',   repeatDays:[]},
+  {id:N+2,  subject:'Chemistry',      date:isoDay(-6), startTime:'10:00', dur:90,  notes:'Bonding chapter — flashcard review',    cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+3,  subject:'English',        date:isoDay(-5), startTime:'14:00', dur:60,  notes:'Macbeth essay — draft intro paragraph', cc:'ec-english',  priority:'medium', repeatDays:[]},
+  {id:N+4,  subject:'Physics',        date:isoDay(-5), startTime:'16:00', dur:75,  notes:'Electricity: V=IR, P=IV, series vs parallel', cc:'ec-science', priority:'high', repeatDays:[]},
+  {id:N+5,  subject:'History',        date:isoDay(-4), startTime:'09:00', dur:60,  notes:'French Revolution causes — essay plan', cc:'ec-history',  priority:'medium', repeatDays:[]},
+  {id:N+6,  subject:'Biology',        date:isoDay(-4), startTime:'11:00', dur:90,  notes:'Past papers x3 — cell biology unit',   cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+7,  subject:'Break / Lunch',  date:isoDay(-4), startTime:'13:00', dur:60,  notes:'Lunch break — no screens!',            cc:'ec-break',    priority:'low',    repeatDays:[]},
+  {id:N+8,  subject:'Revision',       date:isoDay(-3), startTime:'10:00', dur:120, notes:'Full chemistry mock paper under timed conditions', cc:'ec-revision', priority:'high', repeatDays:[]},
+  {id:N+9,  subject:'Mathematics',    date:isoDay(-3), startTime:'13:00', dur:60,  notes:'Statistics — probability tree diagrams', cc:'ec-maths',   priority:'medium', repeatDays:[]},
+  {id:N+10, subject:'Computer Science',date:isoDay(-2),startTime:'09:00', dur:90,  notes:'Algorithms — sorting + Big-O notation', cc:'ec-maths',   priority:'medium', repeatDays:[]},
+  {id:N+11, subject:'English',        date:isoDay(-2), startTime:'15:00', dur:60,  notes:'Macbeth — annotate Act 3 scenes',       cc:'ec-english',  priority:'medium', repeatDays:[]},
+  {id:N+12, subject:'Revision',       date:isoDay(-1), startTime:'09:30', dur:90,  notes:'Physics exam prep — formula sheet + past MCQs', cc:'ec-revision', priority:'high', repeatDays:[]},
+  {id:N+13, subject:'Break / Lunch',  date:isoDay(-1), startTime:'12:00', dur:45,  notes:'Rest before afternoon session',         cc:'ec-break',    priority:'low',    repeatDays:[]},
+  {id:N+14, subject:'Chemistry',      date:isoDay(-1), startTime:'14:00', dur:60,  notes:'Organic chemistry — functional groups', cc:'ec-science',  priority:'medium', repeatDays:[]},
+
+  /* Today */
+  {id:N+15, subject:'Physics',        date:isoDay(0),  startTime:'08:30', dur:90,  notes:'EXAM DAY — review V=IR one last time then rest', cc:'ec-science', priority:'high', repeatDays:[]},
+  {id:N+16, subject:'Mathematics',    date:isoDay(0),  startTime:'14:00', dur:60,  notes:'Post-exam: start next chapter — trigonometry', cc:'ec-maths', priority:'low', repeatDays:[]},
+
+  /* This week ahead */
+  {id:N+17, subject:'History',        date:isoDay(1),  startTime:'10:00', dur:75,  notes:'French Revolution — write full essay draft', cc:'ec-history', priority:'high', repeatDays:[]},
+  {id:N+18, subject:'Biology',        date:isoDay(1),  startTime:'13:00', dur:60,  notes:'Genetics chapter — Punnett squares',     cc:'ec-science',  priority:'medium', repeatDays:[]},
+  {id:N+19, subject:'English',        date:isoDay(2),  startTime:'09:00', dur:90,  notes:'Essay final draft + peer review',         cc:'ec-english',  priority:'high',   repeatDays:[]},
+  {id:N+20, subject:'Revision',       date:isoDay(2),  startTime:'14:00', dur:60,  notes:'Weekly review — what did I learn this week?', cc:'ec-revision', priority:'medium', repeatDays:[]},
+  {id:N+21, subject:'Mathematics',    date:isoDay(3),  startTime:'09:30', dur:90,  notes:'Trigonometry — sin/cos/tan ratios + practice', cc:'ec-maths', priority:'high', repeatDays:[]},
+  {id:N+22, subject:'Chemistry',      date:isoDay(3),  startTime:'14:00', dur:75,  notes:'Rates of reaction — experiment write-up', cc:'ec-science',  priority:'medium', repeatDays:[]},
+  {id:N+23, subject:'Break / Lunch',  date:isoDay(4),  startTime:'12:00', dur:60,  notes:'Rest day — light walk, no heavy studying', cc:'ec-break',   priority:'low',    repeatDays:[]},
+  {id:N+24, subject:'History',        date:isoDay(4),  startTime:'15:00', dur:60,  notes:'WWI causes — compare with French Revolution', cc:'ec-history', priority:'medium', repeatDays:[]},
+  {id:N+25, subject:'Revision',       date:isoDay(5),  startTime:'10:00', dur:120, notes:'Full mock: Biology paper 1 — 2 hours timed', cc:'ec-revision', priority:'high',  repeatDays:[]},
+  {id:N+26, subject:'Mathematics',    date:isoDay(6),  startTime:'11:00', dur:60,  notes:'Weekend catch-up — any weak topics from the week', cc:'ec-maths', priority:'low', repeatDays:[]},
+
+  /* Next week preview */
+  {id:N+27, subject:'Chemistry',      date:isoDay(7),  startTime:'09:00', dur:90,  notes:'Equilibrium — Le Chatelier principle',   cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+28, subject:'English',        date:isoDay(8),  startTime:'10:00', dur:60,  notes:'Poetry anthology — compare two unseen poems', cc:'ec-english', priority:'medium', repeatDays:[]},
+  {id:N+29, subject:'Mathematics',    date:isoDay(9),  startTime:'09:30', dur:90,  notes:'Vectors — magnitude and direction problems', cc:'ec-maths', priority:'high', repeatDays:[]},
+  {id:N+30, subject:'Revision',       date:isoDay(10), startTime:'14:00', dur:90,  notes:'Mid-term revision block — all subjects overview', cc:'ec-revision', priority:'high', repeatDays:[]}
+];
+
+/* ── WRITE TO LOCALSTORAGE ── */
+var keys = [
+  ['studly_account',      JSON.stringify(a)],
+  ['studly_journal',      JSON.stringify(j)],
+  ['studly_comp_history', JSON.stringify(ch)],
+  ['studly_todos',        JSON.stringify(t)],
+  ['studly_goals',        JSON.stringify(g)],
+  ['studly_activity_log', JSON.stringify(al)],
+  ['studly_playlists',    JSON.stringify(pl)],
+  ['veda_planner',        JSON.stringify(plannerEvents)],
+  ['studly_quicknote',    'Physics exam today — review: V=IR, P=IV, series vs parallel. Do not forget calculator!'],
+  ['studly_onboarded',    '1'],
+  ['studly_sbpref',       'open'],
+  ['studly_sb',           'true'],
+  ['studly_fontsize',     'medium'],
+  ['studly_accent',       '#4d9fff'],
+  ['studly_uistyle',      'default'],
+  ['studly_tabs_visited', JSON.stringify(['home','homework','notes','study','chat','journal','todo','games','exam','calc','library','themes','settings','planner'])],
+  ['hi_bubble',   '73'],
+  ['hi_scramble', '18'],
+  ['hi_math',     '34'],
+  ['hi_typing',   '87'],
+  ['hi_reaction', '214'],
+  ['hi_snake',    '420'],
+  ['hi_flags',    '22'],
+  ['hi_sudoku',   '950']
+];
+keys.forEach(function(p) { localStorage.setItem(p[0], p[1]); });
+alert('✅ Veda dev data seeded! (v3 — badges + planner included) Reloading...');
+location.reload();
+})();">⚡ Seed Veda</a>
+    <br>
+    <span class="drag-hint">← Drag this onto your bookmarks bar.<br>It's a script, not a link — it won't navigate anywhere.</span>
+
+    <div class="seeds-list">
+      <span class="seed-tag">👤 Profile + Stats</span>
+      <span class="seed-tag">🏅 All 23 Badges</span>
+      <span class="seed-tag">📓 12 Journal Entries</span>
+      <span class="seed-tag">💬 Chat History</span>
+      <span class="seed-tag">✅ Todos + Goals</span>
+      <span class="seed-tag">📅 Study Planner</span>
+      <span class="seed-tag">📊 14-day Activity</span>
+      <span class="seed-tag">🎮 High Scores</span>
+      <span class="seed-tag">🎵 Playlists</span>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="card">
+  <div class="step-num">3</div>
+  <div class="step-title">Go to veda-net.com, then click "⚡ Seed Veda"</div>
+  <div class="step-body">
+    The bookmarklet runs in veda-net.com's context, writes all demo data to its localStorage, then reloads. That's it — the app will be fully pre-populated.
+  </div>
+</div>
+
+<!-- DEVTOOLS ALT -->
+<div class="card">
+  <div class="step-num" style="color:var(--accent);">OR</div>
+  <div class="step-title">Paste directly into DevTools console on veda-net.com</div>
+  <div class="step-body">
+    Open DevTools (<kbd>F12</kbd>), go to the Console tab, paste and hit Enter.
+    <div class="code-block" id="script-display">javascript:(function(){
+var N = Date.now();
+function sd(n) { var d=new Date(); d.setDate(d.getDate()-n); return d.toLocaleDateString('en-GB'); }
+function isoDay(n) { var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+
+/* ── ACCOUNT ── */
+var a = {
+  name: 'User',
+  avatar: '🎓',
+  gems: 1240,
+  streak: 30,
+  lastLogin: new Date().toDateString(),
+  level: 12,
+  xp: 5800,
+  stats: {
+    questions: 94,
+    notes: 52,
+    games: 63,
+    pomodoro: 28,
+    todoDone: 31,
+    tabsVisited: 14,
+    journal: 12,
+    flashcards: 55,
+    exams: 11
+  },
+  badges: {
+    first_q:     true,
+    streak3:     true,
+    streak7:     true,
+    streak14:    true,
+    streak30:    true,
+    gem100:      true,
+    gem500:      true,
+    gem1000:     true,
+    game5:       true,
+    game20:      true,
+    journal5:    true,
+    journal20:   false,
+    notes10:     true,
+    notes50:     true,
+    flash_master:true,
+    flash50:     true,
+    pom5:        true,
+    pom20:       true,
+    exam1:       true,
+    exam10:      true,
+    todo10:      true,
+    questions50: true,
+    all_tabs:    true
+  },
+  shopOwned: {
+    theme_aurora:  true,
+    theme_galaxy:  true,
+    border_gold:   true,
+    border_purple: true
+  }
+};
+
+/* ── JOURNAL ── */
+var j = [
+  {id:N-1, date:sd(0), time:'21:14', mood:'😤', moodLabel:'Stressed', title:'Pre-exam anxiety is real', text:'Physics exam is tomorrow and I feel like I have forgotten everything. Went through the electricity chapter again tonight and it felt like reading it for the first time. Going to try the Veda flashcards and hope it clicks. Trying not to spiral. Deep breaths.'},
+  {id:N-2, date:sd(1), time:'18:30', mood:'😊', moodLabel:'Happy', title:'Chemistry win!', text:'Got my Chemistry coursework back and I got an A! I could not believe it — I thought I messed up the conclusion but my analysis was strong. Ms. Tan wrote excellent use of data and clear scientific reasoning which made my whole week. Celebrated with bubble tea.'},
+  {id:N-3, date:sd(2), time:'20:00', mood:'😴', moodLabel:'Tired', title:'Running on empty', text:'Really drained today. Football practice in the morning, three classes back-to-back, then tried a Pomodoro session but kept zoning out after 25 minutes. Need to start sleeping earlier. Tomorrow is a new day.'},
+  {id:N-4, date:sd(4), time:'17:45', mood:'🔥', moodLabel:'Motivated', title:'In the zone — 4 hour session', text:'Most productive study session in ages. Started at 2pm, did not stop until 6. Used the Pomodoro timer properly — four 25-minute blocks. Finished French Revolution notes AND started the practice essay. The Veda mind map feature is genuinely great for this topic. 30-day streak feels incredible.'},
+  {id:N-5, date:sd(5), time:'22:00', mood:'😐', moodLabel:'Meh', title:'Meh kind of day', text:'Medium day. Got through the maths worksheet but it took twice as long as it should. Ate dinner too late and now need to review English annotations. Might just do 20 minutes and call it.'},
+  {id:N-6, date:sd(6), time:'19:00', mood:'😊', moodLabel:'Happy', title:'Library study + flag quiz wins', text:'Studied with Priya at the library for two hours. So much easier to focus with someone else there. Quizzed each other on the periodic table and got 18/20 — my best yet. Then played Flag Quiz on Veda to wind down and got 22 which is apparently a high score. Good evening.'},
+  {id:N-7, date:sd(8), time:'21:30', mood:'😤', moodLabel:'Stressed', title:'Three assessments incoming', text:'Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — helped me realise it is manageable if I spread it out. Talked to Companion and it helped me calm down. Going to sleep instead of cramming.'},
+  {id:N-8, date:sd(10), time:'16:20', mood:'🔥', moodLabel:'Motivated', title:'Essay done and submitted', text:'English essay submitted! Spent about 6 hours on it across three days and I am actually proud of it. The intro about symbolism of light in Macbeth came together really well. Used the Veda essay plan tool to structure my arguments — saved so much time. Handed in with an hour to spare.'},
+  {id:N-9, date:sd(12), time:'20:45', mood:'😊', moodLabel:'Happy', title:'Two weeks in and loving it', text:'Been using Veda every single day for two weeks now. It started as just a homework helper but I genuinely look forward to opening it. The journal especially — never thought I would be someone who journals but having a space to brain-dump is really helpful. Streak at 12 days. Goal: hit 30.'},
+  {id:N-10, date:sd(14), time:'18:00', mood:'😴', moodLabel:'Tired', title:'Rest day (needed it)', text:'Revision is a marathon and I am starting to feel it. Took a proper break today — no studying, just a walk and TV. Felt guilty the whole time but it was genuinely necessary. Coming back tomorrow with a fresh plan. Rest is productive.'},
+  {id:N-11, date:sd(17), time:'21:00', mood:'🔥', moodLabel:'Motivated', title:'93% on mock — personal best!', text:'First ever 90+ on a mock paper! Got 93% on Chemistry MCQ. The flashcard sessions on Veda must be working because recall felt almost automatic on the bonding questions. Teacher said my explanations were detailed and well-structured. Keeping the same routine.'},
+  {id:N-12, date:sd(20), time:'17:00', mood:'😐', moodLabel:'Okay', title:'Day 1 — new term, new goals', text:'First journal entry! Starting to track moods and study days. Goal this term: hit target grades, keep streak going, stay on top of homework instead of last-minute rushing. Staying consistent. Here we go.'}
+];
+
+/* ── CHAT HISTORY ── */
+var ch = [
+  {role:'user',  parts:[{text:'I am feeling really overwhelmed with everything right now'}]},
+  {role:'model', parts:[{text:'That sounds genuinely exhausting. What is weighing on you most — school stuff or life stuff in general?'}]},
+  {role:'user',  parts:[{text:'Mostly school, three assessments this week and I have not slept properly in days'}]},
+  {role:'model', parts:[{text:'Three in one week is a lot, no wonder your brain is fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep. Is there any way to protect even 7 hours tonight?'}]},
+  {role:'user',  parts:[{text:'probably not but I will try. can you help me with history revision'}]},
+  {role:'model', parts:[{text:'Of course! What topic? Quiz, summary, or something that is not clicking?'}]},
+  {role:'user',  parts:[{text:'French Revolution, causes for the essay'}]},
+  {role:'model', parts:[{text:'Examiners love causes questions. Main ones: financial crisis from funding the American Revolution, social inequality — Third Estate paid all taxes, weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?'}]},
+  {role:'user',  parts:[{text:'quiz me!'}]},
+  {role:'model', parts:[{text:'Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?'}]},
+  {role:'user',  parts:[{text:'The American War of Independence? Because they spent loads of money?'}]},
+  {role:'model', parts:[{text:'Exactly right. Key thing for your essay: France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link gets you top marks. Next: who made up the Third Estate and why were they angry?'}]}
+];
+
+/* ── TODOS ── */
+var t = [
+  {id:N-100, text:'Complete biology past papers (x3)', done:true,  created:sd(5)},
+  {id:N-101, text:'Submit English essay on Macbeth',   done:true,  created:sd(10)},
+  {id:N-102, text:'Review French Revolution notes',    done:true,  created:sd(4)},
+  {id:N-103, text:'Make Chemistry flashcards — bonding chapter', done:true, created:sd(3)},
+  {id:N-104, text:'Pomodoro session: 4 blocks',        done:true,  created:sd(1)},
+  {id:N-105, text:'Revise electricity formulas for Physics exam', done:false, created:sd(0)},
+  {id:N-106, text:'Read chapters 5-7 for English lit', done:false, created:sd(0)},
+  {id:N-107, text:'Email Mr. Hassan about coursework deadline', done:false, created:sd(1)}
+];
+
+/* ── GOALS ── */
+var g = [
+  {id:1, text:'Study at least 2 hours per day',   done:true},
+  {id:2, text:'Complete all homework before 9pm', done:true},
+  {id:3, text:'Finish 3 past papers this week',   done:true},
+  {id:4, text:'Keep streak above 30 days',        done:true},
+  {id:5, text:'Get above 80% on next mock',       done:false}
+];
+
+/* ── ACTIVITY LOG (14 days) ── */
+var al = {};
+for (var i=0;i&lt;14;i++) {
+  var dd=new Date(); dd.setDate(dd.getDate()-i);
+  var k=dd.toISOString().split('T')[0];
+  al[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};
+}
+
+/* ── PLAYLISTS ── */
+var pl = [
+  {name:'Lo-fi Study',   id:'37i9dQZF1DWWQRwui0ExPn', type:'playlist'},
+  {name:'Deep Focus',    id:'37i9dQZF1DX9sIqqvKsjEK', type:'playlist'},
+  {name:'Coding Vibes',  id:'37i9dQZF1DX5trt9i14X7j', type:'playlist'}
+];
+
+/* ── STUDY PLANNER (veda_planner) ── */
+/* Event shape: { id, subject, date (YYYY-MM-DD), startTime (HH:MM), dur (minutes), notes, cc (colour class), priority, repeatDays:[] } */
+var plannerEvents = [
+  /* This week — recurring subjects */
+  {id:N+1,  subject:'Mathematics',    date:isoDay(-6), startTime:'08:00', dur:60,  notes:'Quadratic equations — past paper Q1-5', cc:'ec-maths',    priority:'high',   repeatDays:[]},
+  {id:N+2,  subject:'Chemistry',      date:isoDay(-6), startTime:'10:00', dur:90,  notes:'Bonding chapter — flashcard review',    cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+3,  subject:'English',        date:isoDay(-5), startTime:'14:00', dur:60,  notes:'Macbeth essay — draft intro paragraph', cc:'ec-english',  priority:'medium', repeatDays:[]},
+  {id:N+4,  subject:'Physics',        date:isoDay(-5), startTime:'16:00', dur:75,  notes:'Electricity: V=IR, P=IV, series vs parallel', cc:'ec-science', priority:'high', repeatDays:[]},
+  {id:N+5,  subject:'History',        date:isoDay(-4), startTime:'09:00', dur:60,  notes:'French Revolution causes — essay plan', cc:'ec-history',  priority:'medium', repeatDays:[]},
+  {id:N+6,  subject:'Biology',        date:isoDay(-4), startTime:'11:00', dur:90,  notes:'Past papers x3 — cell biology unit',   cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+7,  subject:'Break / Lunch',  date:isoDay(-4), startTime:'13:00', dur:60,  notes:'Lunch break — no screens!',            cc:'ec-break',    priority:'low',    repeatDays:[]},
+  {id:N+8,  subject:'Revision',       date:isoDay(-3), startTime:'10:00', dur:120, notes:'Full chemistry mock paper under timed conditions', cc:'ec-revision', priority:'high', repeatDays:[]},
+  {id:N+9,  subject:'Mathematics',    date:isoDay(-3), startTime:'13:00', dur:60,  notes:'Statistics — probability tree diagrams', cc:'ec-maths',   priority:'medium', repeatDays:[]},
+  {id:N+10, subject:'Computer Science',date:isoDay(-2),startTime:'09:00', dur:90,  notes:'Algorithms — sorting + Big-O notation', cc:'ec-maths',   priority:'medium', repeatDays:[]},
+  {id:N+11, subject:'English',        date:isoDay(-2), startTime:'15:00', dur:60,  notes:'Macbeth — annotate Act 3 scenes',       cc:'ec-english',  priority:'medium', repeatDays:[]},
+  {id:N+12, subject:'Revision',       date:isoDay(-1), startTime:'09:30', dur:90,  notes:'Physics exam prep — formula sheet + past MCQs', cc:'ec-revision', priority:'high', repeatDays:[]},
+  {id:N+13, subject:'Break / Lunch',  date:isoDay(-1), startTime:'12:00', dur:45,  notes:'Rest before afternoon session',         cc:'ec-break',    priority:'low',    repeatDays:[]},
+  {id:N+14, subject:'Chemistry',      date:isoDay(-1), startTime:'14:00', dur:60,  notes:'Organic chemistry — functional groups', cc:'ec-science',  priority:'medium', repeatDays:[]},
+
+  /* Today */
+  {id:N+15, subject:'Physics',        date:isoDay(0),  startTime:'08:30', dur:90,  notes:'EXAM DAY — review V=IR one last time then rest', cc:'ec-science', priority:'high', repeatDays:[]},
+  {id:N+16, subject:'Mathematics',    date:isoDay(0),  startTime:'14:00', dur:60,  notes:'Post-exam: start next chapter — trigonometry', cc:'ec-maths', priority:'low', repeatDays:[]},
+
+  /* This week ahead */
+  {id:N+17, subject:'History',        date:isoDay(1),  startTime:'10:00', dur:75,  notes:'French Revolution — write full essay draft', cc:'ec-history', priority:'high', repeatDays:[]},
+  {id:N+18, subject:'Biology',        date:isoDay(1),  startTime:'13:00', dur:60,  notes:'Genetics chapter — Punnett squares',     cc:'ec-science',  priority:'medium', repeatDays:[]},
+  {id:N+19, subject:'English',        date:isoDay(2),  startTime:'09:00', dur:90,  notes:'Essay final draft + peer review',         cc:'ec-english',  priority:'high',   repeatDays:[]},
+  {id:N+20, subject:'Revision',       date:isoDay(2),  startTime:'14:00', dur:60,  notes:'Weekly review — what did I learn this week?', cc:'ec-revision', priority:'medium', repeatDays:[]},
+  {id:N+21, subject:'Mathematics',    date:isoDay(3),  startTime:'09:30', dur:90,  notes:'Trigonometry — sin/cos/tan ratios + practice', cc:'ec-maths', priority:'high', repeatDays:[]},
+  {id:N+22, subject:'Chemistry',      date:isoDay(3),  startTime:'14:00', dur:75,  notes:'Rates of reaction — experiment write-up', cc:'ec-science',  priority:'medium', repeatDays:[]},
+  {id:N+23, subject:'Break / Lunch',  date:isoDay(4),  startTime:'12:00', dur:60,  notes:'Rest day — light walk, no heavy studying', cc:'ec-break',   priority:'low',    repeatDays:[]},
+  {id:N+24, subject:'History',        date:isoDay(4),  startTime:'15:00', dur:60,  notes:'WWI causes — compare with French Revolution', cc:'ec-history', priority:'medium', repeatDays:[]},
+  {id:N+25, subject:'Revision',       date:isoDay(5),  startTime:'10:00', dur:120, notes:'Full mock: Biology paper 1 — 2 hours timed', cc:'ec-revision', priority:'high',  repeatDays:[]},
+  {id:N+26, subject:'Mathematics',    date:isoDay(6),  startTime:'11:00', dur:60,  notes:'Weekend catch-up — any weak topics from the week', cc:'ec-maths', priority:'low', repeatDays:[]},
+
+  /* Next week preview */
+  {id:N+27, subject:'Chemistry',      date:isoDay(7),  startTime:'09:00', dur:90,  notes:'Equilibrium — Le Chatelier principle',   cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+28, subject:'English',        date:isoDay(8),  startTime:'10:00', dur:60,  notes:'Poetry anthology — compare two unseen poems', cc:'ec-english', priority:'medium', repeatDays:[]},
+  {id:N+29, subject:'Mathematics',    date:isoDay(9),  startTime:'09:30', dur:90,  notes:'Vectors — magnitude and direction problems', cc:'ec-maths', priority:'high', repeatDays:[]},
+  {id:N+30, subject:'Revision',       date:isoDay(10), startTime:'14:00', dur:90,  notes:'Mid-term revision block — all subjects overview', cc:'ec-revision', priority:'high', repeatDays:[]}
+];
+
+/* ── WRITE TO LOCALSTORAGE ── */
+var keys = [
+  ['studly_account',      JSON.stringify(a)],
+  ['studly_journal',      JSON.stringify(j)],
+  ['studly_comp_history', JSON.stringify(ch)],
+  ['studly_todos',        JSON.stringify(t)],
+  ['studly_goals',        JSON.stringify(g)],
+  ['studly_activity_log', JSON.stringify(al)],
+  ['studly_playlists',    JSON.stringify(pl)],
+  ['veda_planner',        JSON.stringify(plannerEvents)],
+  ['studly_quicknote',    'Physics exam today — review: V=IR, P=IV, series vs parallel. Do not forget calculator!'],
+  ['studly_onboarded',    '1'],
+  ['studly_sbpref',       'open'],
+  ['studly_sb',           'true'],
+  ['studly_fontsize',     'medium'],
+  ['studly_accent',       '#4d9fff'],
+  ['studly_uistyle',      'default'],
+  ['studly_tabs_visited', JSON.stringify(['home','homework','notes','study','chat','journal','todo','games','exam','calc','library','themes','settings','planner'])],
+  ['hi_bubble',   '73'],
+  ['hi_scramble', '18'],
+  ['hi_math',     '34'],
+  ['hi_typing',   '87'],
+  ['hi_reaction', '214'],
+  ['hi_snake',    '420'],
+  ['hi_flags',    '22'],
+  ['hi_sudoku',   '950']
+];
+keys.forEach(function(p) { localStorage.setItem(p[0], p[1]); });
+alert('✅ Veda dev data seeded! (v3 — badges + planner included) Reloading...');
+location.reload();
+})();</div>
+    <button class="copy-btn" onclick="copyScript()">📋 Copy script to clipboard</button>
+  </div>
+</div>
+
+<footer>veda-net.com</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// THE SEEDER SCRIPT — edit this to change what gets seeded
+// ─────────────────────────────────────────────────────────────
+function buildScript() {
+  return `(function(){
+var N = Date.now();
+function sd(n) { var d=new Date(); d.setDate(d.getDate()-n); return d.toLocaleDateString('en-GB'); }
+function isoDay(n) { var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+
+/* ── ACCOUNT ── */
+var a = {
+  name: 'User',
+  avatar: '🎓',
+  gems: 1240,
+  streak: 30,
+  lastLogin: new Date().toDateString(),
+  level: 12,
+  xp: 5800,
+  stats: {
+    questions: 94,
+    notes: 52,
+    games: 63,
+    pomodoro: 28,
+    todoDone: 31,
+    tabsVisited: 14,
+    journal: 12,
+    flashcards: 55,
+    exams: 11
+  },
+  badges: {
+    first_q:     true,
+    streak3:     true,
+    streak7:     true,
+    streak14:    true,
+    streak30:    true,
+    gem100:      true,
+    gem500:      true,
+    gem1000:     true,
+    game5:       true,
+    game20:      true,
+    journal5:    true,
+    journal20:   false,
+    notes10:     true,
+    notes50:     true,
+    flash_master:true,
+    flash50:     true,
+    pom5:        true,
+    pom20:       true,
+    exam1:       true,
+    exam10:      true,
+    todo10:      true,
+    questions50: true,
+    all_tabs:    true
+  },
+  shopOwned: {
+    theme_aurora:  true,
+    theme_galaxy:  true,
+    border_gold:   true,
+    border_purple: true
+  }
+};
+
+/* ── JOURNAL ── */
+var j = [
+  {id:N-1, date:sd(0), time:'21:14', mood:'😤', moodLabel:'Stressed', title:'Pre-exam anxiety is real', text:'Physics exam is tomorrow and I feel like I have forgotten everything. Went through the electricity chapter again tonight and it felt like reading it for the first time. Going to try the Veda flashcards and hope it clicks. Trying not to spiral. Deep breaths.'},
+  {id:N-2, date:sd(1), time:'18:30', mood:'😊', moodLabel:'Happy', title:'Chemistry win!', text:'Got my Chemistry coursework back and I got an A! I could not believe it — I thought I messed up the conclusion but my analysis was strong. Ms. Tan wrote excellent use of data and clear scientific reasoning which made my whole week. Celebrated with bubble tea.'},
+  {id:N-3, date:sd(2), time:'20:00', mood:'😴', moodLabel:'Tired', title:'Running on empty', text:'Really drained today. Football practice in the morning, three classes back-to-back, then tried a Pomodoro session but kept zoning out after 25 minutes. Need to start sleeping earlier. Tomorrow is a new day.'},
+  {id:N-4, date:sd(4), time:'17:45', mood:'🔥', moodLabel:'Motivated', title:'In the zone — 4 hour session', text:'Most productive study session in ages. Started at 2pm, did not stop until 6. Used the Pomodoro timer properly — four 25-minute blocks. Finished French Revolution notes AND started the practice essay. The Veda mind map feature is genuinely great for this topic. 30-day streak feels incredible.'},
+  {id:N-5, date:sd(5), time:'22:00', mood:'😐', moodLabel:'Meh', title:'Meh kind of day', text:'Medium day. Got through the maths worksheet but it took twice as long as it should. Ate dinner too late and now need to review English annotations. Might just do 20 minutes and call it.'},
+  {id:N-6, date:sd(6), time:'19:00', mood:'😊', moodLabel:'Happy', title:'Library study + flag quiz wins', text:'Studied with Priya at the library for two hours. So much easier to focus with someone else there. Quizzed each other on the periodic table and got 18/20 — my best yet. Then played Flag Quiz on Veda to wind down and got 22 which is apparently a high score. Good evening.'},
+  {id:N-7, date:sd(8), time:'21:30', mood:'😤', moodLabel:'Stressed', title:'Three assessments incoming', text:'Three assessments in one week. Biology, History and English all overlapping. Made a to-do list in Veda with every task broken down — helped me realise it is manageable if I spread it out. Talked to Companion and it helped me calm down. Going to sleep instead of cramming.'},
+  {id:N-8, date:sd(10), time:'16:20', mood:'🔥', moodLabel:'Motivated', title:'Essay done and submitted', text:'English essay submitted! Spent about 6 hours on it across three days and I am actually proud of it. The intro about symbolism of light in Macbeth came together really well. Used the Veda essay plan tool to structure my arguments — saved so much time. Handed in with an hour to spare.'},
+  {id:N-9, date:sd(12), time:'20:45', mood:'😊', moodLabel:'Happy', title:'Two weeks in and loving it', text:'Been using Veda every single day for two weeks now. It started as just a homework helper but I genuinely look forward to opening it. The journal especially — never thought I would be someone who journals but having a space to brain-dump is really helpful. Streak at 12 days. Goal: hit 30.'},
+  {id:N-10, date:sd(14), time:'18:00', mood:'😴', moodLabel:'Tired', title:'Rest day (needed it)', text:'Revision is a marathon and I am starting to feel it. Took a proper break today — no studying, just a walk and TV. Felt guilty the whole time but it was genuinely necessary. Coming back tomorrow with a fresh plan. Rest is productive.'},
+  {id:N-11, date:sd(17), time:'21:00', mood:'🔥', moodLabel:'Motivated', title:'93% on mock — personal best!', text:'First ever 90+ on a mock paper! Got 93% on Chemistry MCQ. The flashcard sessions on Veda must be working because recall felt almost automatic on the bonding questions. Teacher said my explanations were detailed and well-structured. Keeping the same routine.'},
+  {id:N-12, date:sd(20), time:'17:00', mood:'😐', moodLabel:'Okay', title:'Day 1 — new term, new goals', text:'First journal entry! Starting to track moods and study days. Goal this term: hit target grades, keep streak going, stay on top of homework instead of last-minute rushing. Staying consistent. Here we go.'}
+];
+
+/* ── CHAT HISTORY ── */
+var ch = [
+  {role:'user',  parts:[{text:'I am feeling really overwhelmed with everything right now'}]},
+  {role:'model', parts:[{text:'That sounds genuinely exhausting. What is weighing on you most — school stuff or life stuff in general?'}]},
+  {role:'user',  parts:[{text:'Mostly school, three assessments this week and I have not slept properly in days'}]},
+  {role:'model', parts:[{text:'Three in one week is a lot, no wonder your brain is fried. Sleep deprivation makes studying way less effective — your brain consolidates memory during sleep. Is there any way to protect even 7 hours tonight?'}]},
+  {role:'user',  parts:[{text:'probably not but I will try. can you help me with history revision'}]},
+  {role:'model', parts:[{text:'Of course! What topic? Quiz, summary, or something that is not clicking?'}]},
+  {role:'user',  parts:[{text:'French Revolution, causes for the essay'}]},
+  {role:'model', parts:[{text:'Examiners love causes questions. Main ones: financial crisis from funding the American Revolution, social inequality — Third Estate paid all taxes, weak leadership from Louis XVI, and Enlightenment ideas about liberty. Want me to quiz you?'}]},
+  {role:'user',  parts:[{text:'quiz me!'}]},
+  {role:'model', parts:[{text:'Which war did France fund that left it nearly bankrupt — and why was that significant for the Revolution?'}]},
+  {role:'user',  parts:[{text:'The American War of Independence? Because they spent loads of money?'}]},
+  {role:'model', parts:[{text:'Exactly right. Key thing for your essay: France emerged victorious but economically devastated, so the government raised taxes, hitting the Third Estate hardest and fuelling resentment. That cause-and-effect link gets you top marks. Next: who made up the Third Estate and why were they angry?'}]}
+];
+
+/* ── TODOS ── */
+var t = [
+  {id:N-100, text:'Complete biology past papers (x3)', done:true,  created:sd(5)},
+  {id:N-101, text:'Submit English essay on Macbeth',   done:true,  created:sd(10)},
+  {id:N-102, text:'Review French Revolution notes',    done:true,  created:sd(4)},
+  {id:N-103, text:'Make Chemistry flashcards — bonding chapter', done:true, created:sd(3)},
+  {id:N-104, text:'Pomodoro session: 4 blocks',        done:true,  created:sd(1)},
+  {id:N-105, text:'Revise electricity formulas for Physics exam', done:false, created:sd(0)},
+  {id:N-106, text:'Read chapters 5-7 for English lit', done:false, created:sd(0)},
+  {id:N-107, text:'Email Mr. Hassan about coursework deadline', done:false, created:sd(1)}
+];
+
+/* ── GOALS ── */
+var g = [
+  {id:1, text:'Study at least 2 hours per day',   done:true},
+  {id:2, text:'Complete all homework before 9pm', done:true},
+  {id:3, text:'Finish 3 past papers this week',   done:true},
+  {id:4, text:'Keep streak above 30 days',        done:true},
+  {id:5, text:'Get above 80% on next mock',       done:false}
+];
+
+/* ── ACTIVITY LOG (14 days) ── */
+var al = {};
+for (var i=0;i<14;i++) {
+  var dd=new Date(); dd.setDate(dd.getDate()-i);
+  var k=dd.toISOString().split('T')[0];
+  al[k]={questions:Math.floor(Math.random()*8)+2,notes:Math.floor(Math.random()*4),games:Math.floor(Math.random()*5),minutes:Math.floor(Math.random()*90)+30};
+}
+
+/* ── PLAYLISTS ── */
+var pl = [
+  {name:'Lo-fi Study',   id:'37i9dQZF1DWWQRwui0ExPn', type:'playlist'},
+  {name:'Deep Focus',    id:'37i9dQZF1DX9sIqqvKsjEK', type:'playlist'},
+  {name:'Coding Vibes',  id:'37i9dQZF1DX5trt9i14X7j', type:'playlist'}
+];
+
+/* ── STUDY PLANNER (veda_planner) ── */
+/* Event shape: { id, subject, date (YYYY-MM-DD), startTime (HH:MM), dur (minutes), notes, cc (colour class), priority, repeatDays:[] } */
+var plannerEvents = [
+  /* This week — recurring subjects */
+  {id:N+1,  subject:'Mathematics',    date:isoDay(-6), startTime:'08:00', dur:60,  notes:'Quadratic equations — past paper Q1-5', cc:'ec-maths',    priority:'high',   repeatDays:[]},
+  {id:N+2,  subject:'Chemistry',      date:isoDay(-6), startTime:'10:00', dur:90,  notes:'Bonding chapter — flashcard review',    cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+3,  subject:'English',        date:isoDay(-5), startTime:'14:00', dur:60,  notes:'Macbeth essay — draft intro paragraph', cc:'ec-english',  priority:'medium', repeatDays:[]},
+  {id:N+4,  subject:'Physics',        date:isoDay(-5), startTime:'16:00', dur:75,  notes:'Electricity: V=IR, P=IV, series vs parallel', cc:'ec-science', priority:'high', repeatDays:[]},
+  {id:N+5,  subject:'History',        date:isoDay(-4), startTime:'09:00', dur:60,  notes:'French Revolution causes — essay plan', cc:'ec-history',  priority:'medium', repeatDays:[]},
+  {id:N+6,  subject:'Biology',        date:isoDay(-4), startTime:'11:00', dur:90,  notes:'Past papers x3 — cell biology unit',   cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+7,  subject:'Break / Lunch',  date:isoDay(-4), startTime:'13:00', dur:60,  notes:'Lunch break — no screens!',            cc:'ec-break',    priority:'low',    repeatDays:[]},
+  {id:N+8,  subject:'Revision',       date:isoDay(-3), startTime:'10:00', dur:120, notes:'Full chemistry mock paper under timed conditions', cc:'ec-revision', priority:'high', repeatDays:[]},
+  {id:N+9,  subject:'Mathematics',    date:isoDay(-3), startTime:'13:00', dur:60,  notes:'Statistics — probability tree diagrams', cc:'ec-maths',   priority:'medium', repeatDays:[]},
+  {id:N+10, subject:'Computer Science',date:isoDay(-2),startTime:'09:00', dur:90,  notes:'Algorithms — sorting + Big-O notation', cc:'ec-maths',   priority:'medium', repeatDays:[]},
+  {id:N+11, subject:'English',        date:isoDay(-2), startTime:'15:00', dur:60,  notes:'Macbeth — annotate Act 3 scenes',       cc:'ec-english',  priority:'medium', repeatDays:[]},
+  {id:N+12, subject:'Revision',       date:isoDay(-1), startTime:'09:30', dur:90,  notes:'Physics exam prep — formula sheet + past MCQs', cc:'ec-revision', priority:'high', repeatDays:[]},
+  {id:N+13, subject:'Break / Lunch',  date:isoDay(-1), startTime:'12:00', dur:45,  notes:'Rest before afternoon session',         cc:'ec-break',    priority:'low',    repeatDays:[]},
+  {id:N+14, subject:'Chemistry',      date:isoDay(-1), startTime:'14:00', dur:60,  notes:'Organic chemistry — functional groups', cc:'ec-science',  priority:'medium', repeatDays:[]},
+
+  /* Today */
+  {id:N+15, subject:'Physics',        date:isoDay(0),  startTime:'08:30', dur:90,  notes:'EXAM DAY — review V=IR one last time then rest', cc:'ec-science', priority:'high', repeatDays:[]},
+  {id:N+16, subject:'Mathematics',    date:isoDay(0),  startTime:'14:00', dur:60,  notes:'Post-exam: start next chapter — trigonometry', cc:'ec-maths', priority:'low', repeatDays:[]},
+
+  /* This week ahead */
+  {id:N+17, subject:'History',        date:isoDay(1),  startTime:'10:00', dur:75,  notes:'French Revolution — write full essay draft', cc:'ec-history', priority:'high', repeatDays:[]},
+  {id:N+18, subject:'Biology',        date:isoDay(1),  startTime:'13:00', dur:60,  notes:'Genetics chapter — Punnett squares',     cc:'ec-science',  priority:'medium', repeatDays:[]},
+  {id:N+19, subject:'English',        date:isoDay(2),  startTime:'09:00', dur:90,  notes:'Essay final draft + peer review',         cc:'ec-english',  priority:'high',   repeatDays:[]},
+  {id:N+20, subject:'Revision',       date:isoDay(2),  startTime:'14:00', dur:60,  notes:'Weekly review — what did I learn this week?', cc:'ec-revision', priority:'medium', repeatDays:[]},
+  {id:N+21, subject:'Mathematics',    date:isoDay(3),  startTime:'09:30', dur:90,  notes:'Trigonometry — sin/cos/tan ratios + practice', cc:'ec-maths', priority:'high', repeatDays:[]},
+  {id:N+22, subject:'Chemistry',      date:isoDay(3),  startTime:'14:00', dur:75,  notes:'Rates of reaction — experiment write-up', cc:'ec-science',  priority:'medium', repeatDays:[]},
+  {id:N+23, subject:'Break / Lunch',  date:isoDay(4),  startTime:'12:00', dur:60,  notes:'Rest day — light walk, no heavy studying', cc:'ec-break',   priority:'low',    repeatDays:[]},
+  {id:N+24, subject:'History',        date:isoDay(4),  startTime:'15:00', dur:60,  notes:'WWI causes — compare with French Revolution', cc:'ec-history', priority:'medium', repeatDays:[]},
+  {id:N+25, subject:'Revision',       date:isoDay(5),  startTime:'10:00', dur:120, notes:'Full mock: Biology paper 1 — 2 hours timed', cc:'ec-revision', priority:'high',  repeatDays:[]},
+  {id:N+26, subject:'Mathematics',    date:isoDay(6),  startTime:'11:00', dur:60,  notes:'Weekend catch-up — any weak topics from the week', cc:'ec-maths', priority:'low', repeatDays:[]},
+
+  /* Next week preview */
+  {id:N+27, subject:'Chemistry',      date:isoDay(7),  startTime:'09:00', dur:90,  notes:'Equilibrium — Le Chatelier principle',   cc:'ec-science',  priority:'high',   repeatDays:[]},
+  {id:N+28, subject:'English',        date:isoDay(8),  startTime:'10:00', dur:60,  notes:'Poetry anthology — compare two unseen poems', cc:'ec-english', priority:'medium', repeatDays:[]},
+  {id:N+29, subject:'Mathematics',    date:isoDay(9),  startTime:'09:30', dur:90,  notes:'Vectors — magnitude and direction problems', cc:'ec-maths', priority:'high', repeatDays:[]},
+  {id:N+30, subject:'Revision',       date:isoDay(10), startTime:'14:00', dur:90,  notes:'Mid-term revision block — all subjects overview', cc:'ec-revision', priority:'high', repeatDays:[]}
+];
+
+/* ── WRITE TO LOCALSTORAGE ── */
+var keys = [
+  ['studly_account',      JSON.stringify(a)],
+  ['studly_journal',      JSON.stringify(j)],
+  ['studly_comp_history', JSON.stringify(ch)],
+  ['studly_todos',        JSON.stringify(t)],
+  ['studly_goals',        JSON.stringify(g)],
+  ['studly_activity_log', JSON.stringify(al)],
+  ['studly_playlists',    JSON.stringify(pl)],
+  ['veda_planner',        JSON.stringify(plannerEvents)],
+  ['studly_quicknote',    'Physics exam today — review: V=IR, P=IV, series vs parallel. Do not forget calculator!'],
+  ['studly_onboarded',    '1'],
+  ['studly_sbpref',       'open'],
+  ['studly_sb',           'true'],
+  ['studly_fontsize',     'medium'],
+  ['studly_accent',       '#4d9fff'],
+  ['studly_uistyle',      'default'],
+  ['studly_tabs_visited', JSON.stringify(['home','homework','notes','study','chat','journal','todo','games','exam','calc','library','themes','settings','planner'])],
+  ['hi_bubble',   '73'],
+  ['hi_scramble', '18'],
+  ['hi_math',     '34'],
+  ['hi_typing',   '87'],
+  ['hi_reaction', '214'],
+  ['hi_snake',    '420'],
+  ['hi_flags',    '22'],
+  ['hi_sudoku',   '950']
+];
+keys.forEach(function(p) { localStorage.setItem(p[0], p[1]); });
+alert('✅ Veda dev data seeded! (v3 — badges + planner included) Reloading...');
+location.reload();
+})();`;
+}
+
+const script = buildScript();
+
+// Set bookmarklet href
+document.getElementById('bm-link').href = 'javascript:' + script;
+
+// Show script in code block
+document.getElementById('script-display').textContent = 'javascript:' + script;
+
+function copyScript() {
+  navigator.clipboard.writeText('javascript:' + script).then(function() {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy script to clipboard', 2000);
   });
 }
 </script>
